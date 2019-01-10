@@ -6,6 +6,7 @@
 package MapView;
 import java.util.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -42,7 +43,9 @@ public class MapViewTest extends javax.swing.JFrame {
     }
     
     public void loadStations(){
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users/s141452/Documents/Stations.csv"))){
+        try{
+            //File f = new File("MapView/Stations.csv");
+            BufferedReader br = new BufferedReader(new FileReader("src/MapView/Stations.csv"));
             String line = br.readLine();
             
             while (line != null){
@@ -69,6 +72,7 @@ public class MapViewTest extends javax.swing.JFrame {
 }
     
     private static Station createStation(String[] meta){
+        //System.out.println(meta[4]);
         meta[0] = meta[0].substring(1);
         int num = Integer.parseInt(meta[0]);
         String name = removeLastChar(meta[4].trim());
