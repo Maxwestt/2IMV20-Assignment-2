@@ -23,16 +23,8 @@ import java.util.List;
  */
 public class MapViewTest extends javax.swing.JFrame {
 
-    //String[][] stations = new String[5][4];
     ArrayList<Station> stations = new ArrayList<Station>();
-//    String[][] stations = {
-//                    {"NO","","","",""},
-//                    {"209","4.518","52.465","0.00","IJMOND"},
-//                    {"210","4.430","52.171","-0.20","VALKENBURG"},
-//                    {"215","4.437","52.141","-1.10","VOORSCHOTEN"},
-//                    {"225","4.555","52.463","4.40","IJMUIDEN"},};
     
-    //String stationNum, stationName, longitude, latitude, height;
     int stationNum;
     String stationName;
     float longitude, latitude, height;
@@ -98,7 +90,7 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextHeight.setText(String.valueOf(height));
     }
     
-    public int findStationNr(int nr){
+    public int findStationNrIndex(int nr){
         for(int i = 0; i < stations.size(); i++){
             System.out.println("BEEP: "+ stations.get(i).getNum());
             if (nr == stations.get(i).getNum()){
@@ -127,8 +119,8 @@ public class MapViewTest extends javax.swing.JFrame {
         jNoStation = new javax.swing.JRadioButton();
         jStation215 = new javax.swing.JRadioButton();
         jStation251 = new javax.swing.JRadioButton();
+        jStation235 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jStation252 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -196,25 +188,25 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Map Netherlands v2.0.png"))); // NOI18N
-
-        jStation252.setBackground(new java.awt.Color(0, 0, 0));
-        LocationChoice.add(jStation252);
-        jStation252.setToolTipText("Hoorn (Terschelling)");
-        jStation252.setOpaque(false);
-        jStation252.addActionListener(new java.awt.event.ActionListener() {
+        jStation235.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation235);
+        jStation235.setToolTipText("De Kooy (Den Helder)");
+        jStation235.setOpaque(false);
+        jStation235.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jStation252ActionPerformed(evt);
+                jStation235ActionPerformed(evt);
             }
         });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Map Netherlands v2.0.png"))); // NOI18N
 
         jLayeredPane1.setLayer(jStation209, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation210, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jNoStation, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation215, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation251, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation235, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jStation252, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -233,7 +225,7 @@ public class MapViewTest extends javax.swing.JFrame {
                         .addComponent(jStation251))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
-                        .addComponent(jStation252))
+                        .addComponent(jStation235))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jStation210)
@@ -260,7 +252,7 @@ public class MapViewTest extends javax.swing.JFrame {
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(jStation251)
                                 .addGap(91, 91, 91)
-                                .addComponent(jStation252)
+                                .addComponent(jStation235)
                                 .addGap(87, 87, 87)))
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -394,12 +386,12 @@ public class MapViewTest extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jStation209ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation209ActionPerformed
-        int n = findStationNr(209);
+        int n = findStationNrIndex(209);
         updateInfo(n);
     }//GEN-LAST:event_jStation209ActionPerformed
 
     private void jStation210ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation210ActionPerformed
-        int n = findStationNr(210);
+        int n = findStationNrIndex(210);
         updateInfo(n);
     }//GEN-LAST:event_jStation210ActionPerformed
 
@@ -416,19 +408,19 @@ public class MapViewTest extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextNameActionPerformed
 
     private void jStation215ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation215ActionPerformed
-        int n = findStationNr(215);
+        int n = findStationNrIndex(215);
         updateInfo(n);
     }//GEN-LAST:event_jStation215ActionPerformed
 
     private void jStation251ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation251ActionPerformed
-        int n = findStationNr(251);
+        int n = findStationNrIndex(251);
         updateInfo(n);
     }//GEN-LAST:event_jStation251ActionPerformed
 
-    private void jStation252ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation252ActionPerformed
-        int n = findStationNr(252);
+    private void jStation235ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation235ActionPerformed
+        int n = findStationNrIndex(235);
         updateInfo(n);
-    }//GEN-LAST:event_jStation252ActionPerformed
+    }//GEN-LAST:event_jStation235ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,8 +473,8 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JRadioButton jStation209;
     private javax.swing.JRadioButton jStation210;
     private javax.swing.JRadioButton jStation215;
+    private javax.swing.JRadioButton jStation235;
     private javax.swing.JRadioButton jStation251;
-    private javax.swing.JRadioButton jStation252;
     private javax.swing.JTextField jTextHeight;
     private javax.swing.JTextField jTextLat;
     private javax.swing.JTextField jTextLong;

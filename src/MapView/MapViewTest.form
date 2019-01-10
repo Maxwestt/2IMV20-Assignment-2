@@ -171,7 +171,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
-                              <Component id="jStation252" min="-2" max="-2" attributes="0"/>
+                              <Component id="jStation235" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
@@ -206,7 +206,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jStation251" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                                      <Component id="jStation252" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jStation235" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -312,14 +312,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jStation251ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/MapView/Images/Map Netherlands v2.0.png"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="jStation252">
+            <Component class="javax.swing.JRadioButton" name="jStation235">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
@@ -327,12 +320,19 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="LocationChoice"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Hoorn (Terschelling)"/>
+                <Property name="toolTipText" type="java.lang.String" value="De Kooy (Den Helder)"/>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jStation252ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jStation235ActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/MapView/Images/Map Netherlands v2.0.png"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
