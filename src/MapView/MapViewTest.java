@@ -414,11 +414,13 @@ public class MapViewTest extends javax.swing.JFrame {
     }//GEN-LAST:event_jStation215ActionPerformed
 
     private void jStation251ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation251ActionPerformed
-        // TODO add your handling code here:
+        int n = findStationNr(252);
+        updateInfo(n);
     }//GEN-LAST:event_jStation251ActionPerformed
 
     private void jStation252ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation252ActionPerformed
-        // TODO add your handling code here:
+        int n = findStationNr(252);
+        updateInfo(n);
     }//GEN-LAST:event_jStation252ActionPerformed
 
     /**
