@@ -507,7 +507,7 @@ class Station{
     }
     public float getLong(){
         return longitude;
-    }
+    } 
     public float getLat(){
         return latitude;
     }
