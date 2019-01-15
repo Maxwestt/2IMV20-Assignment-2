@@ -120,11 +120,32 @@ public class MapViewTest extends javax.swing.JFrame {
         jStation215 = new javax.swing.JRadioButton();
         jStation251 = new javax.swing.JRadioButton();
         jStation235 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
         jStation240 = new javax.swing.JRadioButton();
         jStation248 = new javax.swing.JRadioButton();
         jStation265 = new javax.swing.JRadioButton();
         jStation259 = new javax.swing.JRadioButton();
+        jStation270 = new javax.swing.JRadioButton();
+        jStation278 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jStation275 = new javax.swing.JRadioButton();
+        jStation274 = new javax.swing.JRadioButton();
+        jStation280 = new javax.swing.JRadioButton();
+        jStation283 = new javax.swing.JRadioButton();
+        jStation286 = new javax.swing.JRadioButton();
+        jStation290 = new javax.swing.JRadioButton();
+        jStation308 = new javax.swing.JRadioButton();
+        jStation310 = new javax.swing.JRadioButton();
+        jStation315 = new javax.swing.JRadioButton();
+        jStation319 = new javax.swing.JRadioButton();
+        jStation330 = new javax.swing.JRadioButton();
+        jStation343 = new javax.swing.JRadioButton();
+        jStation348 = new javax.swing.JRadioButton();
+        jStation356 = new javax.swing.JRadioButton();
+        jStation370 = new javax.swing.JRadioButton();
+        jStation375 = new javax.swing.JRadioButton();
+        jStation377 = new javax.swing.JRadioButton();
+        jStation380 = new javax.swing.JRadioButton();
+        jStation381 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -202,8 +223,6 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Map Netherlands v2.0.png"))); // NOI18N
-
         jStation240.setBackground(new java.awt.Color(0, 0, 0));
         LocationChoice.add(jStation240);
         jStation240.setToolTipText("Schiphol");
@@ -244,22 +263,303 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
+        jStation270.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation270);
+        jStation270.setToolTipText("Leeuwarden");
+        jStation270.setOpaque(false);
+        jStation270.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation270ActionPerformed(evt);
+            }
+        });
+
+        jStation278.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation278);
+        jStation278.setToolTipText("Heino");
+        jStation278.setOpaque(false);
+        jStation278.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation278ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Map Netherlands v2.0.png"))); // NOI18N
+
+        jStation275.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation275);
+        jStation275.setToolTipText("Deelen");
+        jStation275.setOpaque(false);
+        jStation275.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation275ActionPerformed(evt);
+            }
+        });
+
+        jStation274.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation274);
+        jStation274.setToolTipText("Marknesse");
+        jStation274.setOpaque(false);
+        jStation274.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation274ActionPerformed(evt);
+            }
+        });
+
+        jStation280.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation280);
+        jStation280.setToolTipText("Eelde");
+        jStation280.setOpaque(false);
+        jStation280.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation280ActionPerformed(evt);
+            }
+        });
+
+        jStation283.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation283);
+        jStation283.setToolTipText("Hupsel");
+        jStation283.setOpaque(false);
+        jStation283.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation283ActionPerformed(evt);
+            }
+        });
+
+        jStation286.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation286);
+        jStation286.setToolTipText("Nieuw Beerta");
+        jStation286.setOpaque(false);
+        jStation286.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation286ActionPerformed(evt);
+            }
+        });
+
+        jStation290.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation290);
+        jStation290.setToolTipText("Twente");
+        jStation290.setOpaque(false);
+        jStation290.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation290ActionPerformed(evt);
+            }
+        });
+
+        jStation308.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation308);
+        jStation308.setToolTipText("Cadzand");
+        jStation308.setOpaque(false);
+        jStation308.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation308ActionPerformed(evt);
+            }
+        });
+
+        jStation310.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation310);
+        jStation310.setToolTipText("Vlissingen");
+        jStation310.setOpaque(false);
+        jStation310.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation310ActionPerformed(evt);
+            }
+        });
+
+        jStation315.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation315);
+        jStation315.setToolTipText("Hansweert");
+        jStation315.setOpaque(false);
+        jStation315.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation315ActionPerformed(evt);
+            }
+        });
+
+        jStation319.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation319);
+        jStation319.setToolTipText("Westdorpe");
+        jStation319.setOpaque(false);
+        jStation319.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation319ActionPerformed(evt);
+            }
+        });
+
+        jStation330.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation330);
+        jStation330.setToolTipText("Hoek van Holland");
+        jStation330.setOpaque(false);
+        jStation330.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation330ActionPerformed(evt);
+            }
+        });
+
+        jStation343.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation343);
+        jStation343.setToolTipText("Rotterdam Geulhaven");
+        jStation343.setOpaque(false);
+        jStation343.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation343ActionPerformed(evt);
+            }
+        });
+
+        jStation348.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation348);
+        jStation348.setToolTipText("Cabauw");
+        jStation348.setOpaque(false);
+        jStation348.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation348ActionPerformed(evt);
+            }
+        });
+
+        jStation356.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation356);
+        jStation356.setToolTipText("Herwijnen");
+        jStation356.setOpaque(false);
+        jStation356.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation356ActionPerformed(evt);
+            }
+        });
+
+        jStation370.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation370);
+        jStation370.setToolTipText("Eindhoven");
+        jStation370.setOpaque(false);
+        jStation370.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation370ActionPerformed(evt);
+            }
+        });
+
+        jStation375.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation375);
+        jStation375.setToolTipText("Volkel");
+        jStation375.setOpaque(false);
+        jStation375.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation375ActionPerformed(evt);
+            }
+        });
+
+        jStation377.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation377);
+        jStation377.setToolTipText("Ell");
+        jStation377.setOpaque(false);
+        jStation377.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation377ActionPerformed(evt);
+            }
+        });
+
+        jStation380.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation380);
+        jStation380.setToolTipText("Maastricht");
+        jStation380.setOpaque(false);
+        jStation380.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation380ActionPerformed(evt);
+            }
+        });
+
+        jStation381.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation381);
+        jStation381.setToolTipText("Arcen");
+        jStation381.setOpaque(false);
+        jStation381.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStation381ActionPerformed(evt);
+            }
+        });
+
         jLayeredPane1.setLayer(jStation209, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation210, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jNoStation, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation215, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation251, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation235, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation240, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation248, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation265, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation259, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation270, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation278, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation275, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation274, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation280, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation283, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation286, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation290, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation308, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation310, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation315, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation319, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation330, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation343, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation348, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation356, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation370, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation375, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation377, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation380, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation381, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jStation270)
+                .addGap(94, 94, 94)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jStation283)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jStation280)
+                        .addGap(44, 44, 44)
+                        .addComponent(jStation286)))
+                .addGap(49, 49, 49))
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(jStation209)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jStation278)
+                .addGap(163, 163, 163))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(jStation330)
+                .addGap(93, 93, 93)
+                .addComponent(jStation348)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addComponent(jStation275)
+                .addGap(204, 204, 204))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jStation290)
+                        .addGap(79, 79, 79))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jStation375)
+                        .addGap(253, 253, 253))))
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jStation319)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jStation377)
+                    .addComponent(jStation380))
+                .addGap(237, 237, 237))
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jStation308)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jStation370)
+                .addGap(274, 274, 274))
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -271,12 +571,6 @@ public class MapViewTest extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(202, 202, 202)
                         .addComponent(jStation240))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(jStation209))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(jStation248))
                     .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
                             .addGap(147, 147, 147)
@@ -287,8 +581,23 @@ public class MapViewTest extends javax.swing.JFrame {
                             .addComponent(jStation265))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
                             .addGap(282, 282, 282)
-                            .addComponent(jStation251))))
-                .addGap(224, 304, Short.MAX_VALUE))
+                            .addComponent(jStation251)))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jStation343)
+                        .addGap(82, 82, 82)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jStation356)
+                            .addComponent(jStation248))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jStation310)
+                .addGap(41, 41, 41)
+                .addComponent(jStation315)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jStation381)
+                .addGap(179, 179, 179))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -299,38 +608,95 @@ public class MapViewTest extends javax.swing.JFrame {
                     .addContainerGap(295, Short.MAX_VALUE)
                     .addComponent(jStation259)
                     .addGap(291, 291, 291)))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                    .addContainerGap(380, Short.MAX_VALUE)
+                    .addComponent(jStation274)
+                    .addGap(206, 206, 206)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addContainerGap(666, Short.MAX_VALUE)
-                        .addComponent(jNoStation))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jStation209)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(jStation251)
-                                .addGap(91, 91, 91)
-                                .addComponent(jStation235)
-                                .addGap(44, 44, 44)
-                                .addComponent(jStation248)
-                                .addGap(22, 22, 22)))
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(68, 68, 68)
-                                .addComponent(jStation210))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jStation265)
+                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addComponent(jStation240)
-                                        .addGap(41, 41, 41)
-                                        .addComponent(jStation215)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(38, 38, 38)
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jStation209)
+                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                .addComponent(jStation251)
+                                                .addGap(20, 20, 20)
+                                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jStation270)
+                                                    .addComponent(jStation286))
+                                                .addGap(50, 50, 50)
+                                                .addComponent(jStation235)
+                                                .addGap(44, 44, 44)
+                                                .addComponent(jStation248)
+                                                .addGap(22, 22, 22)))
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                .addGap(68, 68, 68)
+                                                .addComponent(jStation210))
+                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jStation265)
+                                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                        .addComponent(jStation240)
+                                                        .addGap(41, 41, 41)
+                                                        .addComponent(jStation215))
+                                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                        .addComponent(jStation290)
+                                                        .addGap(19, 19, 19)
+                                                        .addComponent(jStation283))))))
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGap(71, 71, 71)
+                                        .addComponent(jStation280)
+                                        .addGap(155, 155, 155)
+                                        .addComponent(jStation278)))
+                                .addGap(13, 13, 13)
+                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jStation275)
+                                    .addComponent(jStation330))
+                                .addGap(5, 5, 5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(jStation348)
+                                .addGap(14, 14, 14)))
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jStation343)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jStation356)))
+                        .addGap(13, 13, 13)
+                        .addComponent(jStation375)
+                        .addGap(78, 78, 78))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jStation370)
+                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jStation381)
+                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jStation310, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jStation315, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addGap(2, 2, 2)
+                                    .addComponent(jStation308))))
+                        .addGap(12, 12, 12)))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jStation319)
+                        .addGap(106, 106, 106)
+                        .addComponent(jNoStation))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jStation377)
+                        .addGap(60, 60, 60)
+                        .addComponent(jStation380)
+                        .addGap(0, 117, Short.MAX_VALUE)))
                 .addGap(32, 32, 32))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -342,6 +708,11 @@ public class MapViewTest extends javax.swing.JFrame {
                     .addGap(238, 238, 238)
                     .addComponent(jStation259)
                     .addContainerGap(462, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(214, 214, 214)
+                    .addComponent(jStation274)
+                    .addContainerGap(486, Short.MAX_VALUE)))
         );
 
         jLabel2.setText("Stationnumber");
@@ -516,6 +887,111 @@ public class MapViewTest extends javax.swing.JFrame {
         updateInfo(n);
     }//GEN-LAST:event_jStation259ActionPerformed
 
+    private void jStation270ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation270ActionPerformed
+          int n = findStationNrIndex(270);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation270ActionPerformed
+
+    private void jStation278ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation278ActionPerformed
+          int n = findStationNrIndex(278);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation278ActionPerformed
+
+    private void jStation275ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation275ActionPerformed
+          int n = findStationNrIndex(275);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation275ActionPerformed
+
+    private void jStation274ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation274ActionPerformed
+          int n = findStationNrIndex(274);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation274ActionPerformed
+
+    private void jStation280ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation280ActionPerformed
+          int n = findStationNrIndex(280);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation280ActionPerformed
+
+    private void jStation283ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation283ActionPerformed
+          int n = findStationNrIndex(283);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation283ActionPerformed
+
+    private void jStation286ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation286ActionPerformed
+          int n = findStationNrIndex(286);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation286ActionPerformed
+
+    private void jStation290ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation290ActionPerformed
+          int n = findStationNrIndex(290);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation290ActionPerformed
+
+    private void jStation308ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation308ActionPerformed
+          int n = findStationNrIndex(308);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation308ActionPerformed
+
+    private void jStation310ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation310ActionPerformed
+        int n = findStationNrIndex(310);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation310ActionPerformed
+
+    private void jStation315ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation315ActionPerformed
+        int n = findStationNrIndex(315);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation315ActionPerformed
+
+    private void jStation319ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation319ActionPerformed
+        int n = findStationNrIndex(319);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation319ActionPerformed
+
+    private void jStation330ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation330ActionPerformed
+        int n = findStationNrIndex(330);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation330ActionPerformed
+
+    private void jStation343ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation343ActionPerformed
+        int n = findStationNrIndex(343);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation343ActionPerformed
+
+    private void jStation348ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation348ActionPerformed
+        int n = findStationNrIndex(348);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation348ActionPerformed
+
+    private void jStation356ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation356ActionPerformed
+        int n = findStationNrIndex(356);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation356ActionPerformed
+
+    private void jStation370ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation370ActionPerformed
+        int n = findStationNrIndex(370);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation370ActionPerformed
+
+    private void jStation375ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation375ActionPerformed
+        int n = findStationNrIndex(375);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation375ActionPerformed
+
+    private void jStation377ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation377ActionPerformed
+        int n = findStationNrIndex(377);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation377ActionPerformed
+
+    private void jStation380ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation380ActionPerformed
+        int n = findStationNrIndex(380);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation380ActionPerformed
+
+    private void jStation381ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation381ActionPerformed
+        int n = findStationNrIndex(381);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation381ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -573,6 +1049,27 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JRadioButton jStation251;
     private javax.swing.JRadioButton jStation259;
     private javax.swing.JRadioButton jStation265;
+    private javax.swing.JRadioButton jStation270;
+    private javax.swing.JRadioButton jStation274;
+    private javax.swing.JRadioButton jStation275;
+    private javax.swing.JRadioButton jStation278;
+    private javax.swing.JRadioButton jStation280;
+    private javax.swing.JRadioButton jStation283;
+    private javax.swing.JRadioButton jStation286;
+    private javax.swing.JRadioButton jStation290;
+    private javax.swing.JRadioButton jStation308;
+    private javax.swing.JRadioButton jStation310;
+    private javax.swing.JRadioButton jStation315;
+    private javax.swing.JRadioButton jStation319;
+    private javax.swing.JRadioButton jStation330;
+    private javax.swing.JRadioButton jStation343;
+    private javax.swing.JRadioButton jStation348;
+    private javax.swing.JRadioButton jStation356;
+    private javax.swing.JRadioButton jStation370;
+    private javax.swing.JRadioButton jStation375;
+    private javax.swing.JRadioButton jStation377;
+    private javax.swing.JRadioButton jStation380;
+    private javax.swing.JRadioButton jStation381;
     private javax.swing.JTextField jTextHeight;
     private javax.swing.JTextField jTextLat;
     private javax.swing.JTextField jTextLong;
