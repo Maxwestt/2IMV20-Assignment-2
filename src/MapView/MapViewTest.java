@@ -41,7 +41,7 @@ public class MapViewTest extends javax.swing.JFrame {
     public void loadStations(){
         try{
             //File f = new File("MapView/Stations.csv");
-            BufferedReader br = new BufferedReader(new FileReader("src/MapView/Stations.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/Stations.csv"));
             String line = br.readLine();
             
             while (line != null){
