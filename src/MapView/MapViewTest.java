@@ -64,11 +64,13 @@ public class MapViewTest extends javax.swing.JFrame {
     public void setChart1(){
         VisLineChart b = new VisLineChart("", "");
         PieChartA a = new PieChartA("", "");
+        VisLineChartEx c = new VisLineChartEx();
         //setLayout(new BorderLayout());
         //this.jSplitPane1.setBottomComponent(a);
         
         this.jSplitPane3.setTopComponent(b);
         this.jSplitPane4.setTopComponent(a);
+        this.jSplitPane4.setBottomComponent(c);
         //JFrame frame = new JFrame();
         //this.add(a);
         //this.pack();
