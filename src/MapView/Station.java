@@ -15,15 +15,13 @@ public class Station{
     private float longitude; 
     private float latitude; 
     private float height; 
-    private String opening;
     
-    public Station(int stationNum, String stationName, float longitude, float latitude, float height, String opening){
+    public Station(int stationNum, String stationName, float longitude, float latitude, float height){
         this.stationNum = stationNum;
         this.stationName = stationName;
         this.longitude = longitude;
         this.latitude = latitude;
         this.height = height;
-        this.opening = opening;
     }
     
     public int getNum(){
@@ -40,8 +38,5 @@ public class Station{
     }
     public float getHeight(){
         return height;
-    }
-    public String getOpening(){
-        return opening;
     }
 }
