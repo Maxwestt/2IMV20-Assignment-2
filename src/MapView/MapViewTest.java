@@ -118,13 +118,13 @@ public class MapViewTest extends javax.swing.JFrame {
     
     public int findStationNrIndex(int nr){
         for(int i = 0; i < stations.size(); i++){
-            System.out.println("BEEP: "+ stations.get(i).getNum());
+            //System.out.println("BEEP: "+ stations.get(i).getNum());
             if (nr == stations.get(i).getNum()){
-                System.out.println(i + " was found");
+                //System.out.println(i + " was found");
                 return i;
             }
         }
-        System.out.println("NO");
+        //System.out.println("NO");
         return 0;
     }
 
