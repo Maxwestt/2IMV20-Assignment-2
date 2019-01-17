@@ -28,7 +28,7 @@ public class MapViewTest extends javax.swing.JFrame {
     ArrayList<Station> stations = new ArrayList<Station>();
     
     int stationNum;
-    String stationName;
+    String stationName, opening;
     float longitude, latitude, height;
     
     public MapViewTest() {
@@ -90,12 +90,13 @@ public class MapViewTest extends javax.swing.JFrame {
         //System.out.println(meta[4]);
         meta[0] = meta[0].substring(1);
         int num = Integer.parseInt(meta[0]);
-        String name = removeLastChar(meta[4].trim());
+        String name = removeLastChar(meta[5].trim());
         float longi = Float.parseFloat(meta[1]);
         float lat = Float.parseFloat(meta[2]);
         float height = Float.parseFloat(meta[3]);
+        String opening = meta[4];
         
-        return new Station(num, name, longi, lat, height);
+        return new Station(num, name, longi, lat, height, opening);
     }
     
     
@@ -111,6 +112,8 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextLat.setText(String.valueOf(latitude));
         height = stat.getHeight();
         jTextHeight.setText(String.valueOf(height));
+        opening = stat.getOpening();
+        jTextOpening.setText(opening);
     }
     
     public int findStationNrIndex(int nr){
@@ -179,6 +182,8 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextLat = new javax.swing.JTextField();
         jTextHeight = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jTextOpening = new javax.swing.JTextField();
         jSplitPane2 = new javax.swing.JSplitPane();
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
@@ -571,13 +576,12 @@ public class MapViewTest extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addComponent(jStation235))
-                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
-                            .addGap(168, 168, 168)
-                            .addComponent(jStation215))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
-                            .addGap(282, 282, 282)
-                            .addComponent(jStation251)))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(jStation215))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(jStation251))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(jStation343)
@@ -732,6 +736,8 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Opening");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -748,21 +754,26 @@ public class MapViewTest extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                             .addComponent(jTextNum)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextLat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                    .addComponent(jTextHeight)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addGap(61, 61, 61)
+                            .addComponent(jTextOpening))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(54, 54, 54)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextLat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                        .addComponent(jTextHeight)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
@@ -791,7 +802,11 @@ public class MapViewTest extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 445, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextOpening, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 419, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162))
         );
@@ -1019,6 +1034,7 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JRadioButton jNoStation;
     private javax.swing.JPanel jPanel1;
@@ -1059,6 +1075,7 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JTextField jTextLong;
     private javax.swing.JTextField jTextName;
     private javax.swing.JTextField jTextNum;
+    private javax.swing.JTextField jTextOpening;
     // End of variables declaration//GEN-END:variables
 }
 
