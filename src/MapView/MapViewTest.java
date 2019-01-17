@@ -137,14 +137,12 @@ public class MapViewTest extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jStation209 = new javax.swing.JRadioButton();
-        jStation210 = new javax.swing.JRadioButton();
         jNoStation = new javax.swing.JRadioButton();
         jStation215 = new javax.swing.JRadioButton();
         jStation251 = new javax.swing.JRadioButton();
         jStation235 = new javax.swing.JRadioButton();
         jStation240 = new javax.swing.JRadioButton();
         jStation248 = new javax.swing.JRadioButton();
-        jStation265 = new javax.swing.JRadioButton();
         jStation259 = new javax.swing.JRadioButton();
         jStation270 = new javax.swing.JRadioButton();
         jStation278 = new javax.swing.JRadioButton();
@@ -196,16 +194,6 @@ public class MapViewTest extends javax.swing.JFrame {
         jStation209.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jStation209ActionPerformed(evt);
-            }
-        });
-
-        jStation210.setBackground(new java.awt.Color(0, 0, 0));
-        LocationChoice.add(jStation210);
-        jStation210.setToolTipText("Valkenburg");
-        jStation210.setOpaque(false);
-        jStation210.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jStation210ActionPerformed(evt);
             }
         });
 
@@ -267,16 +255,6 @@ public class MapViewTest extends javax.swing.JFrame {
         jStation248.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jStation248ActionPerformed(evt);
-            }
-        });
-
-        jStation265.setBackground(new java.awt.Color(0, 0, 0));
-        LocationChoice.add(jStation265);
-        jStation265.setToolTipText("Soesterberg");
-        jStation265.setOpaque(false);
-        jStation265.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jStation265ActionPerformed(evt);
             }
         });
 
@@ -503,14 +481,12 @@ public class MapViewTest extends javax.swing.JFrame {
         });
 
         jLayeredPane1.setLayer(jStation209, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jStation210, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jNoStation, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation215, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation251, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation235, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation240, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation248, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jStation265, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation259, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation270, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation278, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -593,14 +569,10 @@ public class MapViewTest extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addComponent(jStation235))
-                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
-                            .addGap(147, 147, 147)
-                            .addComponent(jStation210)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jStation215)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jStation265))
+                            .addGap(168, 168, 168)
+                            .addComponent(jStation215))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
                             .addGap(282, 282, 282)
                             .addComponent(jStation251)))
@@ -664,22 +636,16 @@ public class MapViewTest extends javax.swing.JFrame {
                                                 .addGap(44, 44, 44)
                                                 .addComponent(jStation248)
                                                 .addGap(22, 22, 22)))
-                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                .addGap(68, 68, 68)
-                                                .addComponent(jStation210))
+                                                .addComponent(jStation240)
+                                                .addGap(41, 41, 41)
+                                                .addComponent(jStation215))
                                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jStation265)
-                                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                        .addComponent(jStation240)
-                                                        .addGap(41, 41, 41)
-                                                        .addComponent(jStation215))
-                                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                        .addComponent(jStation290)
-                                                        .addGap(19, 19, 19)
-                                                        .addComponent(jStation283))))))
+                                                .addComponent(jStation290)
+                                                .addGap(19, 19, 19)
+                                                .addComponent(jStation283))))
                                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                         .addGap(71, 71, 71)
                                         .addComponent(jStation280)
@@ -968,11 +934,6 @@ public class MapViewTest extends javax.swing.JFrame {
         updateInfo(n);
     }//GEN-LAST:event_jStation259ActionPerformed
 
-    private void jStation265ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation265ActionPerformed
-        int n = findStationNrIndex(265);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation265ActionPerformed
-
     private void jStation248ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation248ActionPerformed
         int n = findStationNrIndex(248);
         updateInfo(n);
@@ -1005,11 +966,6 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextLat.setText("");
         jTextHeight.setText("");
     }//GEN-LAST:event_jNoStationActionPerformed
-
-    private void jStation210ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation210ActionPerformed
-        int n = findStationNrIndex(210);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation210ActionPerformed
 
     private void jStation209ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation209ActionPerformed
         int n = findStationNrIndex(209);
@@ -1069,14 +1025,12 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane4;
     private javax.swing.JRadioButton jStation209;
-    private javax.swing.JRadioButton jStation210;
     private javax.swing.JRadioButton jStation215;
     private javax.swing.JRadioButton jStation235;
     private javax.swing.JRadioButton jStation240;
     private javax.swing.JRadioButton jStation248;
     private javax.swing.JRadioButton jStation251;
     private javax.swing.JRadioButton jStation259;
-    private javax.swing.JRadioButton jStation265;
     private javax.swing.JRadioButton jStation270;
     private javax.swing.JRadioButton jStation274;
     private javax.swing.JRadioButton jStation275;
