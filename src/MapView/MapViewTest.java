@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package MapView;
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,6 +21,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -60,6 +66,8 @@ public class MapViewTest extends javax.swing.JFrame {
             ioe.printStackTrace();
         } 
     }
+  
+    
     
     public void setChart1(){
         VisLineChart b = new VisLineChart("", "");
@@ -67,6 +75,35 @@ public class MapViewTest extends javax.swing.JFrame {
         VisLineChartEx c = new VisLineChartEx();
         //setLayout(new BorderLayout());
         //this.jSplitPane1.setBottomComponent(a);
+        Icon icon = jLabel1.getIcon();
+        BufferedImage bi = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),BufferedImage.TYPE_INT_RGB);
+        
+        BufferedImage bi2 = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),BufferedImage.TYPE_INT_RGB);
+                
+        Graphics2D g2d = bi.createGraphics();
+        g2d.setColor(Color.RED);
+        g2d.fillRect(0, 0, bi.getWidth(), bi.getHeight());
+        g2d.dispose();
+        
+        
+        Graphics2D g = bi2.createGraphics();
+        icon.paintIcon(null, g, 0,0);
+      
+        float alpha = 1.0f;
+        int compositeRule = AlphaComposite.SRC_OVER;
+        AlphaComposite ac;
+        ac = AlphaComposite.getInstance(compositeRule, alpha);
+        g.setComposite(ac);
+        g.drawImage(bi2,0,0,null);
+        ac = AlphaComposite.getInstance(compositeRule, 0.4f);
+        g.setComposite(ac);
+        g.drawImage(bi,0,0,null);
+        g.dispose();
+        
+        
+        
+        jLabel1.setIcon(new ImageIcon(bi2));
+        
         
         this.jSplitPane3.setTopComponent(b);
         this.jSplitPane4.setTopComponent(a);
