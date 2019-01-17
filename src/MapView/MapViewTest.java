@@ -114,6 +114,7 @@ public class MapViewTest extends javax.swing.JFrame {
         LocationChoice = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLabel1 = new javax.swing.JLabel();
         jStation209 = new javax.swing.JRadioButton();
         jStation210 = new javax.swing.JRadioButton();
         jNoStation = new javax.swing.JRadioButton();
@@ -126,7 +127,6 @@ public class MapViewTest extends javax.swing.JFrame {
         jStation259 = new javax.swing.JRadioButton();
         jStation270 = new javax.swing.JRadioButton();
         jStation278 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
         jStation275 = new javax.swing.JRadioButton();
         jStation274 = new javax.swing.JRadioButton();
         jStation280 = new javax.swing.JRadioButton();
@@ -161,6 +161,8 @@ public class MapViewTest extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Map Netherlands v2.0.png"))); // NOI18N
 
         jStation209.setBackground(new java.awt.Color(0, 0, 0));
         LocationChoice.add(jStation209);
@@ -282,8 +284,6 @@ public class MapViewTest extends javax.swing.JFrame {
                 jStation278ActionPerformed(evt);
             }
         });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Map Netherlands v2.0.png"))); // NOI18N
 
         jStation275.setBackground(new java.awt.Color(0, 0, 0));
         LocationChoice.add(jStation275);
@@ -475,6 +475,7 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
+        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation209, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation210, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jNoStation, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -487,7 +488,6 @@ public class MapViewTest extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jStation259, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation270, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation278, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation275, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation274, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation280, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -547,7 +547,7 @@ public class MapViewTest extends javax.swing.JFrame {
                         .addComponent(jStation375)
                         .addGap(253, 253, 253))))
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(81, 81, 81)
                 .addComponent(jStation319)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -621,83 +621,82 @@ public class MapViewTest extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(38, 38, 38)
+                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jStation209)
                                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
+                                        .addComponent(jStation251)
+                                        .addGap(20, 20, 20)
                                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jStation209)
-                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                .addComponent(jStation251)
-                                                .addGap(20, 20, 20)
-                                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jStation270)
-                                                    .addComponent(jStation286))
-                                                .addGap(50, 50, 50)
-                                                .addComponent(jStation235)
-                                                .addGap(44, 44, 44)
-                                                .addComponent(jStation248)
-                                                .addGap(22, 22, 22)))
-                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                .addGap(68, 68, 68)
-                                                .addComponent(jStation210))
-                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jStation265)
-                                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                        .addComponent(jStation240)
-                                                        .addGap(41, 41, 41)
-                                                        .addComponent(jStation215))
-                                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                                        .addComponent(jStation290)
-                                                        .addGap(19, 19, 19)
-                                                        .addComponent(jStation283))))))
-                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addGap(71, 71, 71)
-                                        .addComponent(jStation280)
-                                        .addGap(155, 155, 155)
-                                        .addComponent(jStation278)))
-                                .addGap(13, 13, 13)
+                                            .addComponent(jStation270)
+                                            .addComponent(jStation286))
+                                        .addGap(50, 50, 50)
+                                        .addComponent(jStation235)
+                                        .addGap(44, 44, 44)
+                                        .addComponent(jStation248)
+                                        .addGap(22, 22, 22)))
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jStation275)
-                                    .addComponent(jStation330))
-                                .addGap(5, 5, 5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(jStation348)
-                                .addGap(14, 14, 14)))
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jStation343)
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addComponent(jStation210))
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jStation265)
+                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                .addComponent(jStation240)
+                                                .addGap(41, 41, 41)
+                                                .addComponent(jStation215))
+                                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                                .addComponent(jStation290)
+                                                .addGap(19, 19, 19)
+                                                .addComponent(jStation283))))))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jStation356)))
+                                .addGap(71, 71, 71)
+                                .addComponent(jStation280)
+                                .addGap(155, 155, 155)
+                                .addComponent(jStation278)))
                         .addGap(13, 13, 13)
-                        .addComponent(jStation375)
-                        .addGap(78, 78, 78))
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jStation275)
+                            .addComponent(jStation330))
+                        .addGap(5, 5, 5))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jStation370)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jStation381)
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jStation310, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jStation315, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGap(2, 2, 2)
-                                    .addComponent(jStation308))))
-                        .addGap(12, 12, 12)))
+                        .addComponent(jStation348)
+                        .addGap(14, 14, 14)))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jStation343)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jStation356)))
+                .addGap(13, 13, 13)
+                .addComponent(jStation375)
+                .addGap(78, 78, 78)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jStation319)
-                        .addGap(106, 106, 106)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jNoStation))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jStation377)
-                        .addGap(60, 60, 60)
+                        .addGap(77, 77, 77)
                         .addComponent(jStation380)
-                        .addGap(0, 117, Short.MAX_VALUE)))
+                        .addGap(0, 100, Short.MAX_VALUE)))
                 .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jStation370)
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jStation381)
+                        .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jStation310, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jStation315, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGap(2, 2, 2)
+                            .addComponent(jStation308))))
+                .addGap(3, 3, 3)
+                .addComponent(jStation319)
+                .addGap(239, 239, 239))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -804,7 +803,7 @@ public class MapViewTest extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jTextHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 664, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1076,38 +1075,4 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JTextField jTextName;
     private javax.swing.JTextField jTextNum;
     // End of variables declaration//GEN-END:variables
-}
-
-
-
-class Station{
-    private int stationNum;
-    private String stationName; 
-    private float longitude; 
-    private float latitude; 
-    private float height; 
-    
-    public Station(int stationNum, String stationName, float longitude, float latitude, float height){
-        this.stationNum = stationNum;
-        this.stationName = stationName;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.height = height;
-    }
-    
-    public int getNum(){
-        return stationNum;
-    }
-    public String getName(){
-        return stationName;
-    }
-    public float getLong(){
-        return longitude;
-    } 
-    public float getLat(){
-        return latitude;
-    }
-    public float getHeight(){
-        return height;
-    }
 }
