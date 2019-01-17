@@ -1114,35 +1114,3 @@ public class MapViewTest extends javax.swing.JFrame {
 }
 
 
-
-class Station{
-    private int stationNum;
-    private String stationName; 
-    private float longitude; 
-    private float latitude; 
-    private float height; 
-    
-    public Station(int stationNum, String stationName, float longitude, float latitude, float height){
-        this.stationNum = stationNum;
-        this.stationName = stationName;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.height = height;
-    }
-    
-    public int getNum(){
-        return stationNum;
-    }
-    public String getName(){
-        return stationName;
-    }
-    public float getLong(){
-        return longitude;
-    } 
-    public float getLat(){
-        return latitude;
-    }
-    public float getHeight(){
-        return height;
-    }
-}
