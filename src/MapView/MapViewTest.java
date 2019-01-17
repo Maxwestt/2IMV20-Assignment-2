@@ -541,65 +541,60 @@ public class MapViewTest extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jStation270)
-                .addGap(94, 94, 94)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jStation283)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jStation280)
-                        .addGap(44, 44, 44)
-                        .addComponent(jStation286)))
-                .addGap(49, 49, 49))
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jStation209)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jStation278)
-                .addGap(163, 163, 163))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jStation330)
-                .addGap(93, 93, 93)
-                .addComponent(jStation348)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(jStation275)
-                .addGap(204, 204, 204))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(333, 333, 333)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jStation290)
                         .addGap(79, 79, 79))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jStation375)
-                        .addGap(253, 253, 253))))
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jStation319)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jStation377)
-                    .addComponent(jStation380))
-                .addGap(237, 237, 237))
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jStation308)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jStation370)
-                .addGap(274, 274, 274))
+                        .addGap(253, 253, 253)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGap(73, 73, 73)
+                                        .addComponent(jStation319))
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(jStation308)))
+                                .addGap(1, 1, 1)
+                                .addComponent(jStation315))
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jStation310)))
+                        .addGap(203, 203, 203)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jStation380)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(jStation370)
+                                .addGap(21, 21, 21))
+                            .addComponent(jStation377))
+                        .addGap(37, 37, 37)
+                        .addComponent(jStation381))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(jStation209)
+                        .addGap(214, 214, 214)
+                        .addComponent(jStation278))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jStation330)
+                        .addGap(93, 93, 93)
+                        .addComponent(jStation348)
+                        .addGap(130, 130, 130)
+                        .addComponent(jStation275))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jNoStation))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addComponent(jStation235))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(jStation240))
                     .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
                             .addGap(147, 147, 147)
@@ -617,16 +612,21 @@ public class MapViewTest extends javax.swing.JFrame {
                         .addGap(82, 82, 82)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jStation356)
-                            .addComponent(jStation248))))
+                            .addComponent(jStation248)))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(jStation240))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(357, 357, 357)
+                        .addComponent(jStation270)
+                        .addGap(94, 94, 94)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jStation283)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(jStation280)
+                                .addGap(44, 44, 44)
+                                .addComponent(jStation286)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jStation310)
-                .addGap(41, 41, 41)
-                .addComponent(jStation315)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jStation381)
-                .addGap(179, 179, 179))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -638,14 +638,14 @@ public class MapViewTest extends javax.swing.JFrame {
                     .addComponent(jStation259)
                     .addContainerGap(291, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(380, Short.MAX_VALUE)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(380, 380, 380)
                     .addComponent(jStation274)
-                    .addGap(206, 206, 206)))
+                    .addContainerGap(206, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -696,52 +696,51 @@ public class MapViewTest extends javax.swing.JFrame {
                                 .addComponent(jStation348)
                                 .addGap(14, 14, 14)))
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jStation343)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jStation356)))
-                        .addGap(13, 13, 13)
-                        .addComponent(jStation375)
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                        .addContainerGap(496, Short.MAX_VALUE)
+                                .addGap(98, 98, 98)
+                                .addComponent(jStation370))
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jStation343)
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jStation356)))
+                                .addGap(13, 13, 13)
+                                .addComponent(jStation375)
+                                .addGap(24, 24, 24)
+                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jStation310)
+                                    .addComponent(jStation315))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jStation308))
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(jStation381))))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(543, 543, 543)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jStation370)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jStation381)
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jStation310, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jStation315, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGap(2, 2, 2)
-                                    .addComponent(jStation308))))
-                        .addGap(12, 12, 12)))
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jStation319)
-                        .addGap(106, 106, 106)
-                        .addComponent(jNoStation))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jStation377)
-                        .addGap(60, 60, 60)
-                        .addComponent(jStation380)
-                        .addGap(0, 131, Short.MAX_VALUE)))
-                .addGap(32, 32, 32))
+                            .addComponent(jStation377)
+                            .addComponent(jStation319))))
+                .addGap(58, 58, 58)
+                .addComponent(jStation380)
+                .addGap(27, 27, 27)
+                .addComponent(jNoStation)
+                .addContainerGap())
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel1)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(76, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(238, 238, 238)
                     .addComponent(jStation259)
-                    .addContainerGap(462, Short.MAX_VALUE)))
+                    .addContainerGap(482, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(214, 214, 214)
                     .addComponent(jStation274)
-                    .addContainerGap(486, Short.MAX_VALUE)))
+                    .addContainerGap(506, Short.MAX_VALUE)))
         );
 
         jLabel2.setText("Stationnumber");
@@ -772,69 +771,63 @@ public class MapViewTest extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLayeredPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                            .addComponent(jTextNum)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
                                 .addGap(54, 54, 54)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextLat, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                                    .addComponent(jTextLong)
+                                    .addComponent(jTextLat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                                     .addComponent(jTextHeight)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jTextNum, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jTextLat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jTextHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                .addComponent(jLayeredPane1)
+                .addGap(106, 106, 106))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextLat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 445, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(162, 162, 162))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -853,7 +846,7 @@ public class MapViewTest extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
 
         pack();
@@ -863,15 +856,149 @@ public class MapViewTest extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jStation209ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation209ActionPerformed
-        int n = findStationNrIndex(209);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation209ActionPerformed
+    private void jTextNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNameActionPerformed
 
-    private void jStation210ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation210ActionPerformed
-        int n = findStationNrIndex(210);
+    private void jStation381ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation381ActionPerformed
+        int n = findStationNrIndex(381);
         updateInfo(n);
-    }//GEN-LAST:event_jStation210ActionPerformed
+    }//GEN-LAST:event_jStation381ActionPerformed
+
+    private void jStation380ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation380ActionPerformed
+        int n = findStationNrIndex(380);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation380ActionPerformed
+
+    private void jStation377ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation377ActionPerformed
+        int n = findStationNrIndex(377);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation377ActionPerformed
+
+    private void jStation375ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation375ActionPerformed
+        int n = findStationNrIndex(375);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation375ActionPerformed
+
+    private void jStation370ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation370ActionPerformed
+        int n = findStationNrIndex(370);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation370ActionPerformed
+
+    private void jStation356ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation356ActionPerformed
+        int n = findStationNrIndex(356);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation356ActionPerformed
+
+    private void jStation348ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation348ActionPerformed
+        int n = findStationNrIndex(348);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation348ActionPerformed
+
+    private void jStation343ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation343ActionPerformed
+        int n = findStationNrIndex(343);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation343ActionPerformed
+
+    private void jStation330ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation330ActionPerformed
+        int n = findStationNrIndex(330);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation330ActionPerformed
+
+    private void jStation319ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation319ActionPerformed
+        int n = findStationNrIndex(319);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation319ActionPerformed
+
+    private void jStation315ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation315ActionPerformed
+        int n = findStationNrIndex(315);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation315ActionPerformed
+
+    private void jStation310ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation310ActionPerformed
+        int n = findStationNrIndex(310);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation310ActionPerformed
+
+    private void jStation308ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation308ActionPerformed
+        int n = findStationNrIndex(308);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation308ActionPerformed
+
+    private void jStation290ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation290ActionPerformed
+        int n = findStationNrIndex(290);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation290ActionPerformed
+
+    private void jStation286ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation286ActionPerformed
+        int n = findStationNrIndex(286);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation286ActionPerformed
+
+    private void jStation283ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation283ActionPerformed
+        int n = findStationNrIndex(283);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation283ActionPerformed
+
+    private void jStation280ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation280ActionPerformed
+        int n = findStationNrIndex(280);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation280ActionPerformed
+
+    private void jStation274ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation274ActionPerformed
+        int n = findStationNrIndex(274);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation274ActionPerformed
+
+    private void jStation275ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation275ActionPerformed
+        int n = findStationNrIndex(275);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation275ActionPerformed
+
+    private void jStation278ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation278ActionPerformed
+        int n = findStationNrIndex(278);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation278ActionPerformed
+
+    private void jStation270ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation270ActionPerformed
+        int n = findStationNrIndex(270);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation270ActionPerformed
+
+    private void jStation259ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation259ActionPerformed
+        int n = findStationNrIndex(259);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation259ActionPerformed
+
+    private void jStation265ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation265ActionPerformed
+        int n = findStationNrIndex(265);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation265ActionPerformed
+
+    private void jStation248ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation248ActionPerformed
+        int n = findStationNrIndex(248);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation248ActionPerformed
+
+    private void jStation240ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation240ActionPerformed
+        int n = findStationNrIndex(240);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation240ActionPerformed
+
+    private void jStation235ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation235ActionPerformed
+        int n = findStationNrIndex(235);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation235ActionPerformed
+
+    private void jStation251ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation251ActionPerformed
+        int n = findStationNrIndex(251);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation251ActionPerformed
+
+    private void jStation215ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation215ActionPerformed
+        int n = findStationNrIndex(215);
+        updateInfo(n);
+    }//GEN-LAST:event_jStation215ActionPerformed
 
     private void jNoStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNoStationActionPerformed
         jTextNum.setText("");
@@ -881,149 +1008,15 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextHeight.setText("");
     }//GEN-LAST:event_jNoStationActionPerformed
 
-    private void jTextNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNameActionPerformed
-
-    private void jStation215ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation215ActionPerformed
-        int n = findStationNrIndex(215);
+    private void jStation210ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation210ActionPerformed
+        int n = findStationNrIndex(210);
         updateInfo(n);
-    }//GEN-LAST:event_jStation215ActionPerformed
+    }//GEN-LAST:event_jStation210ActionPerformed
 
-    private void jStation251ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation251ActionPerformed
-        int n = findStationNrIndex(251);
+    private void jStation209ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation209ActionPerformed
+        int n = findStationNrIndex(209);
         updateInfo(n);
-    }//GEN-LAST:event_jStation251ActionPerformed
-
-    private void jStation235ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation235ActionPerformed
-        int n = findStationNrIndex(235);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation235ActionPerformed
-
-    private void jStation240ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation240ActionPerformed
-        int n = findStationNrIndex(240);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation240ActionPerformed
-
-    private void jStation248ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation248ActionPerformed
-        int n = findStationNrIndex(248);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation248ActionPerformed
-
-    private void jStation265ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation265ActionPerformed
-        int n = findStationNrIndex(265);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation265ActionPerformed
-
-    private void jStation259ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation259ActionPerformed
-        int n = findStationNrIndex(259);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation259ActionPerformed
-
-    private void jStation270ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation270ActionPerformed
-          int n = findStationNrIndex(270);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation270ActionPerformed
-
-    private void jStation278ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation278ActionPerformed
-          int n = findStationNrIndex(278);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation278ActionPerformed
-
-    private void jStation275ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation275ActionPerformed
-          int n = findStationNrIndex(275);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation275ActionPerformed
-
-    private void jStation274ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation274ActionPerformed
-          int n = findStationNrIndex(274);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation274ActionPerformed
-
-    private void jStation280ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation280ActionPerformed
-          int n = findStationNrIndex(280);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation280ActionPerformed
-
-    private void jStation283ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation283ActionPerformed
-          int n = findStationNrIndex(283);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation283ActionPerformed
-
-    private void jStation286ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation286ActionPerformed
-          int n = findStationNrIndex(286);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation286ActionPerformed
-
-    private void jStation290ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation290ActionPerformed
-          int n = findStationNrIndex(290);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation290ActionPerformed
-
-    private void jStation308ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation308ActionPerformed
-          int n = findStationNrIndex(308);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation308ActionPerformed
-
-    private void jStation310ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation310ActionPerformed
-        int n = findStationNrIndex(310);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation310ActionPerformed
-
-    private void jStation315ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation315ActionPerformed
-        int n = findStationNrIndex(315);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation315ActionPerformed
-
-    private void jStation319ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation319ActionPerformed
-        int n = findStationNrIndex(319);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation319ActionPerformed
-
-    private void jStation330ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation330ActionPerformed
-        int n = findStationNrIndex(330);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation330ActionPerformed
-
-    private void jStation343ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation343ActionPerformed
-        int n = findStationNrIndex(343);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation343ActionPerformed
-
-    private void jStation348ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation348ActionPerformed
-        int n = findStationNrIndex(348);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation348ActionPerformed
-
-    private void jStation356ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation356ActionPerformed
-        int n = findStationNrIndex(356);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation356ActionPerformed
-
-    private void jStation370ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation370ActionPerformed
-        int n = findStationNrIndex(370);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation370ActionPerformed
-
-    private void jStation375ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation375ActionPerformed
-        int n = findStationNrIndex(375);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation375ActionPerformed
-
-    private void jStation377ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation377ActionPerformed
-        int n = findStationNrIndex(377);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation377ActionPerformed
-
-    private void jStation380ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation380ActionPerformed
-        int n = findStationNrIndex(380);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation380ActionPerformed
-
-    private void jStation381ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation381ActionPerformed
-        int n = findStationNrIndex(381);
-        updateInfo(n);
-    }//GEN-LAST:event_jStation381ActionPerformed
+    }//GEN-LAST:event_jStation209ActionPerformed
 
     /**
      * @param args the command line arguments
