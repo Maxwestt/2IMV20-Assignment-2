@@ -982,6 +982,7 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextLong.setText("");
         jTextLat.setText("");
         jTextHeight.setText("");
+        jTextOpening.setText("");
     }//GEN-LAST:event_jNoStationActionPerformed
 
     private void jStation209ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation209ActionPerformed
