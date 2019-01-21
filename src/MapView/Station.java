@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package MapView;
+import java.util.*;
 
 /**
  *
@@ -17,6 +18,10 @@ public class Station{
     private float height; 
     private String opening;
     
+    private ArrayList<Integer> time;
+    private ArrayList<Double> tempavg, tempmin, 
+            tempmax, windsp, winddir, percipation, pressure;
+    
     public Station(int stationNum, String stationName, float longitude, float latitude, float height, String opening){
         this.stationNum = stationNum;
         this.stationName = stationName;
@@ -24,6 +29,15 @@ public class Station{
         this.latitude = latitude;
         this.height = height;
         this.opening = opening;
+        
+        this.time = new ArrayList<Integer>();
+        this.tempavg = new ArrayList<Double>();
+        this.tempmin = new ArrayList<Double>();
+        this.tempmax = new ArrayList<Double>();
+        this.windsp = new ArrayList<Double>();
+        this.winddir = new ArrayList<Double>();
+        this.percipation = new ArrayList<Double>();
+        this.pressure = new ArrayList<Double>();
     }
     
     public int getNum(){
