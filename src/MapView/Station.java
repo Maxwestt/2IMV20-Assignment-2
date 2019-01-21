@@ -18,9 +18,13 @@ public class Station{
     private float height; 
     private String opening;
     
+    private String[] attributts;
+    
     private ArrayList<Integer> time;
     private ArrayList<Double> tempavg, tempmin, 
             tempmax, windsp, winddir, percipation, pressure;
+    
+    private HashMap A;
     
     public Station(int stationNum, String stationName, float longitude, float latitude, float height, String opening){
         this.stationNum = stationNum;
@@ -30,14 +34,20 @@ public class Station{
         this.height = height;
         this.opening = opening;
         
-        this.time = new ArrayList<Integer>();
-        this.tempavg = new ArrayList<Double>();
-        this.tempmin = new ArrayList<Double>();
-        this.tempmax = new ArrayList<Double>();
-        this.windsp = new ArrayList<Double>();
-        this.winddir = new ArrayList<Double>();
-        this.percipation = new ArrayList<Double>();
-        this.pressure = new ArrayList<Double>();
+        attributts = new String[8];
+        attributts[0] = "time";
+        attributts[1] = "winddir";
+        attributts[2] = "windsp";
+        attributts[3] = "tempavg";
+        attributts[4] = "tempmin";
+        attributts[5] = "tempmax";
+        attributts[6] = "percipation";
+        attributts[7] = "pressure";
+        
+        A = new HashMap();
+        for (String i: attributts){
+            A.put(i, new ArrayList<Double>());
+        }
     }
     
     public int getNum(){
@@ -57,5 +67,8 @@ public class Station{
     }
     public String getOpening(){
         return opening;
+    }
+    public HashMap getMap(){
+        return A;
     }
 }

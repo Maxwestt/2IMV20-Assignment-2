@@ -37,6 +37,8 @@ public class MapViewTest extends javax.swing.JFrame {
     String stationName, opening;
     float longitude, latitude, height;
     
+    ArrayList<Integer> stationnumbers = new ArrayList<Integer>();
+    
     public MapViewTest() {
         initComponents();
         loadStations();
@@ -45,6 +47,8 @@ public class MapViewTest extends javax.swing.JFrame {
     }
     
     public void loadStations(){
+        
+        
         try{
             //File f = new File("MapView/Stations.csv");
             BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/Stations.csv"));
@@ -54,6 +58,7 @@ public class MapViewTest extends javax.swing.JFrame {
                 //System.out.println("HOI");
                 String[] attributes = line.split(",");
                 //System.out.println("HOI2");
+                stationnumbers.add(Integer.parseInt(attributes[0].substring(1)));
                 Station station = createStation(attributes);
                 //System.out.println("HO3");
                 stations.add(station);
@@ -64,7 +69,47 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         } catch (IOException ioe){
             ioe.printStackTrace();
-        } 
+        }
+        
+        HashMap H = new HashMap();
+        for (int snum: stationnumbers){
+            //System.out.println(stations.get(stationnumbers.indexOf(snum)));
+            H.put(snum, stations.get(stationnumbers.indexOf(snum)));
+            //System.out.println(H.get(snum));
+        }
+        
+        System.out.println(H.keySet());
+        
+        String[] attributts = new String[8];
+        attributts[0] = "time";
+        attributts[1] = "winddir";
+        attributts[2] = "windsp";
+        attributts[3] = "tempavg";
+        attributts[4] = "tempmin";
+        attributts[5] = "tempmax";
+        attributts[6] = "percipation";
+        attributts[7] = "pressure";
+        
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/KNMI_reduced.txt"));
+            String line;
+            
+            while ( (line = br.readLine()) != null ){
+                if (!line.startsWith("#")){
+                    String[] attributes = line.split(",");
+                    int snum = Integer.parseInt(attributes[0].substring(2));
+                    //System.out.println(snum);
+                    //System.out.println(H.get(snum));
+                    for (int i = 1; i < attributes.length; i++){
+                        //System.out.println(H.get(snum).getClass());
+                        Station p = (Station) H.get(snum);
+                        p.getMap().get(attributts[i]);
+                    }
+                }
+            }
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
     }
   
     
