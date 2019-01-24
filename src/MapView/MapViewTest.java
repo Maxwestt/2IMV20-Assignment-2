@@ -97,13 +97,22 @@ public class MapViewTest extends javax.swing.JFrame {
             while ( (line = br.readLine()) != null ){
                 if (!line.startsWith("#")){
                     String[] attributes = line.split(",");
+                    //System.out.println(attributes[0]);
                     int snum = Integer.parseInt(attributes[0].substring(2));
+                    
+                    //System.out.println(attributes[attributes.length-1]);
                     //System.out.println(snum);
                     //System.out.println(H.get(snum));
                     for (int i = 1; i < attributes.length; i++){
                         //System.out.println(H.get(snum).getClass());
-                        Station p = (Station) H.get(snum);
-                        p.getMap().get(attributts[i]);
+                        Station curst = (Station)(H.get(snum));
+                        ArrayList<Double> arr = (ArrayList<Double>) (curst.getMap().get(attributts[i-1]));
+                        if (attributes[i].replaceAll("\\s+","").isEmpty()){
+                            arr.add(Double.NaN);
+                        } else {
+                            arr.add(Double.parseDouble(attributes[i]));
+                        }
+                        //((ArrayList<Double>)(((Station) H.get(snum)).getMap()).get(attributts[i]));
                     }
                 }
             }
