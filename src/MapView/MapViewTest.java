@@ -39,8 +39,6 @@ public class MapViewTest extends javax.swing.JFrame {
     
     ArrayList<Integer> stationnumbers = new ArrayList<Integer>();
     
-    HashMap<Integer,Station> H;
-    
     public MapViewTest() {
         initComponents();
         loadStations();
