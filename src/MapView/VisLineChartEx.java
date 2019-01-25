@@ -62,13 +62,15 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
     ArrayList<Double> datax;
     ArrayList<Double> datay;
     int year;
-    boolean alldata;
+    double minVal;
+    double maxVal;
     
-    public VisLineChartEx(ArrayList<Double> datax, ArrayList<Double> datay, int year, boolean alldata) { 
+    public VisLineChartEx(ArrayList<Double> datax, ArrayList<Double> datay, int year) { 
         this.datax = datax;
         this.datay = datay;
         this.year = year;
-        this.alldata = alldata;
+        minVal = 0;
+        maxVal = 1.0;
         
         initUI();
         // default size
@@ -106,7 +108,7 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 
     private XYDataset createDataset() {
 
-        TimeSeries series = new TimeSeries("data");
+        TimeSeries series = new TimeSeries("Average Temperature");
         //System.out.println(datax.size());
         for(int i = 0; i < datax.size(); i++){
             
@@ -114,11 +116,19 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
                     Date temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", datax.get(i)));
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(temp);
-                    if(calendar.get(Calendar.YEAR) == year || alldata){
-                        Day day = new Day(temp);
-                        //System.out.println(temp.);
-                        series.add(day, datay.get(i));   
-                    }
+                    //if (year > 0){
+                        if(calendar.get(Calendar.YEAR) == year || year<0){
+                            Day day = new Day(temp);
+                            //System.out.println(temp.);
+                            series.add(day, datay.get(i));
+                            minVal  = datay.get(i) < minVal? datay.get(i):minVal;
+                            maxVal  = datay.get(i) > maxVal? datay.get(i):maxVal;
+                        }
+//                    } else {
+//                        Day day = new Day(temp);
+//                        series.add(day, datay.get(i));
+//                    }
+                    
                 } catch (ParseException ex) {
                     Logger.getLogger(VisLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -132,6 +142,27 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
         return dataset;
     }
 
+    public double getListMinimum(ArrayList<Double> data){
+        double min = 0;
+        
+        for (int i = 0; i < data.size(); i++){
+            if (data.get(i) < min){
+                min = data.get(i);
+            }
+        }
+        return min;
+    }
+    
+    public double getListMaximum(ArrayList<Double> data){
+        double max = 1;
+        
+        for (int i = 0; i < data.size(); i++){
+            if (data.get(i) > max){
+                max = data.get(i);
+            }
+        }
+        return max;
+    }
     
     
     
@@ -153,6 +184,8 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.RED);
         renderer.setSeriesStroke(0, new BasicStroke(.3f));
+        
+        plot.getRangeAxis().setRange(minVal,maxVal);
 
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(Color.white);

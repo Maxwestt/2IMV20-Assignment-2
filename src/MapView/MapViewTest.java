@@ -122,9 +122,15 @@ public class MapViewTest extends javax.swing.JFrame {
     public void setChart1(){
         VisLineChart b = new VisLineChart("", "");
         PieChartA a = new PieChartA("", "");
-        ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(235).getMap().get("time")));
-        ArrayList<Double> ydata = ((ArrayList<Double>) (H.get(235).getMap().get("tempavg")));
-        VisLineChartEx c = new VisLineChartEx(xdata, ydata, 2002, false);
+        ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));
+        ArrayList<Double> ydata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+        VisLineChartEx c;
+        if (timeYear){
+            c = new VisLineChartEx(xdata, ydata, selectedYear);
+        } else {
+            c = new VisLineChartEx(xdata, ydata, -1);
+        }
+        
         //setLayout(new BorderLayout());
         //this.jSplitPane1.setBottomComponent(a);
         Icon icon = jLabel1.getIcon();
@@ -210,6 +216,8 @@ public class MapViewTest extends javax.swing.JFrame {
         for (int y = startyear; y <= endyear; y++){
             jYearBox.addItem(Integer.toString(y));
         }
+        
+        setChart1();
     }
     
     public int findStationNrIndex(int nr){
@@ -263,7 +271,7 @@ public class MapViewTest extends javax.swing.JFrame {
         jStation375 = new javax.swing.JRadioButton();
         jStation377 = new javax.swing.JRadioButton();
         jStation380 = new javax.swing.JRadioButton();
-        jStation381 = new javax.swing.JRadioButton();
+        jStation391 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -563,13 +571,13 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
-        jStation381.setBackground(new java.awt.Color(0, 0, 0));
-        LocationChoice.add(jStation381);
-        jStation381.setToolTipText("Arcen");
-        jStation381.setOpaque(false);
-        jStation381.addActionListener(new java.awt.event.ActionListener() {
+        jStation391.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation391);
+        jStation391.setToolTipText("Arcen");
+        jStation391.setOpaque(false);
+        jStation391.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jStation381ActionPerformed(evt);
+                jStation391ActionPerformed(evt);
             }
         });
 
@@ -601,7 +609,7 @@ public class MapViewTest extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jStation375, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation377, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation380, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jStation381, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation391, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -642,7 +650,7 @@ public class MapViewTest extends javax.swing.JFrame {
                                 .addGap(21, 21, 21))
                             .addComponent(jStation377))
                         .addGap(37, 37, 37)
-                        .addComponent(jStation381))
+                        .addComponent(jStation391))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(188, 188, 188)
                         .addComponent(jStation209)
@@ -767,7 +775,7 @@ public class MapViewTest extends javax.swing.JFrame {
                                 .addComponent(jStation308))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addGap(78, 78, 78)
-                                .addComponent(jStation381))))
+                                .addComponent(jStation391))))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(543, 543, 543)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -971,21 +979,23 @@ public class MapViewTest extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jYearBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jYearBoxActionPerformed
-        System.out.println("ZOOP");
         if (jYearBox.getSelectedItem()!=null){
             selectedYear = Integer.parseInt((String) jYearBox.getSelectedItem());
         }
-        System.out.println(selectedYear);
+        System.out.println("Selected Year: " + selectedYear);
+        setChart1();
     }//GEN-LAST:event_jYearBoxActionPerformed
 
     private void jTimeYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeYearActionPerformed
         jYearBox.setEnabled(true);
         timeYear = true;
+        setChart1();
     }//GEN-LAST:event_jTimeYearActionPerformed
 
     private void jTimeWholeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeWholeActionPerformed
         jYearBox.setEnabled(false);
         timeYear = false;
+        setChart1();
     }//GEN-LAST:event_jTimeWholeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -996,10 +1006,10 @@ public class MapViewTest extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNameActionPerformed
 
-    private void jStation381ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation381ActionPerformed
-        int n = findStationNrIndex(381);
+    private void jStation391ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation391ActionPerformed
+        int n = findStationNrIndex(391);
         updateInfo(n);
-    }//GEN-LAST:event_jStation381ActionPerformed
+    }//GEN-LAST:event_jStation391ActionPerformed
 
     private void jStation380ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation380ActionPerformed
         int n = findStationNrIndex(380);
@@ -1217,7 +1227,7 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JRadioButton jStation375;
     private javax.swing.JRadioButton jStation377;
     private javax.swing.JRadioButton jStation380;
-    private javax.swing.JRadioButton jStation381;
+    private javax.swing.JRadioButton jStation391;
     private javax.swing.JTextField jTextHeight;
     private javax.swing.JTextField jTextLat;
     private javax.swing.JTextField jTextLong;
