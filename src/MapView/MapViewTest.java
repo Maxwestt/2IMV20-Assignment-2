@@ -50,22 +50,15 @@ public class MapViewTest extends javax.swing.JFrame {
         
         
         try{
-            //File f = new File("MapView/Stations.csv");
             BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/Stations.csv"));
             String line = br.readLine();
             
             while (line != null){
-                //System.out.println("HOI");
                 String[] attributes = line.split(",");
-                //System.out.println("HOI2");
                 stationnumbers.add(Integer.parseInt(attributes[0].substring(1)));
                 Station station = createStation(attributes);
-                //System.out.println("HO3");
                 stations.add(station);
-                //System.out.println("HO4");
                 line = br.readLine();
-                //System.out.println("HOI5");
-                //System.out.println(line);
             }
         } catch (IOException ioe){
             ioe.printStackTrace();
@@ -97,21 +90,15 @@ public class MapViewTest extends javax.swing.JFrame {
             while ( (line = br.readLine()) != null ){
                 if (!line.startsWith("#")){
                     String[] attributes = line.split(",");
-                    //System.out.println(attributes[0]);
                     int snum = Integer.parseInt(attributes[0].substring(2));
                     
-                    //System.out.println(attributes[attributes.length-1]);
-                    //System.out.println(snum);
-                    //System.out.println(H.get(snum));
                     for (int i = 1; i < attributes.length; i++){
-                        //System.out.println(H.get(snum).getClass());
                         ArrayList<Double> al = (ArrayList<Double>) (H.get(snum).getMap().get(attributts[i-1]));
                         if (attributes[i].replaceAll("\\s+","").isEmpty()){
                             al.add(Double.NaN);
                         } else {
                             al.add(Double.parseDouble(attributes[i]));
                         }
-                        //((ArrayList<Double>)(((Station) H.get(snum)).getMap()).get(attributts[i]));
                     }
                 }
             }
@@ -177,7 +164,6 @@ public class MapViewTest extends javax.swing.JFrame {
 }
     
     private static Station createStation(String[] meta){
-        //System.out.println(meta[4]);
         meta[0] = meta[0].substring(1);
         int num = Integer.parseInt(meta[0]);
         String name = removeLastChar(meta[5].trim());
@@ -208,14 +194,11 @@ public class MapViewTest extends javax.swing.JFrame {
     
     public int findStationNrIndex(int nr){
         for(int i = 0; i < stations.size(); i++){
-            //System.out.println("BEEP: "+ stations.get(i).getNum());
             if (nr == stations.get(i).getNum()){
-                //System.out.println(i + " was found");
                 return i;
             }
         }
-        //System.out.println("NO");
-        return 0;
+        return 0; //"none" is selected
     }
 
     /**
