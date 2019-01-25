@@ -44,7 +44,7 @@ public class MapViewTest extends javax.swing.JFrame {
     
     public MapViewTest() {
         initComponents();
-        loadStations();
+        loadData();
         
         setChart1();
         jYearBox.removeAllItems();
@@ -52,9 +52,7 @@ public class MapViewTest extends javax.swing.JFrame {
         selectedYear = 2018;
     }
     
-    public void loadStations(){
-        
-        
+    public void loadData(){
         try{
             BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/Stations.csv"));
             String line = br.readLine();
@@ -103,7 +101,9 @@ public class MapViewTest extends javax.swing.JFrame {
                         if (attributes[i].replaceAll("\\s+","").isEmpty()){
                             al.add(Double.NaN);
                         } else {
-                            al.add(Double.parseDouble(attributes[i]));
+                            if (i > 1){
+                                al.add(Double.parseDouble(attributes[i]) / 10.0);
+                            }
                         }
                     }
                 }
