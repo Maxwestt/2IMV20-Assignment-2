@@ -37,6 +37,9 @@ public class MapViewTest extends javax.swing.JFrame {
     String stationName, opening;
     float longitude, latitude, height;
     
+    boolean timeYear;
+    int selectedYear;
+    
     ArrayList<Integer> stationnumbers = new ArrayList<Integer>();
     
     public MapViewTest() {
@@ -44,6 +47,9 @@ public class MapViewTest extends javax.swing.JFrame {
         loadStations();
         
         setChart1();
+        jYearBox.removeAllItems();
+        timeYear = false;
+        selectedYear = 2018;
     }
     
     public void loadStations(){
@@ -190,6 +196,14 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextHeight.setText(String.valueOf(height));
         opening = stat.getOpening();
         jTextOpening.setText(opening);
+        
+        jYearBox.removeAllItems();
+        
+        int startyear = Integer.parseInt(opening.substring(0, 4));
+        int endyear = 2018;
+        for (int y = startyear; y <= endyear; y++){
+            jYearBox.addItem(Integer.toString(y));
+        }
     }
     
     public int findStationNrIndex(int nr){
@@ -211,11 +225,11 @@ public class MapViewTest extends javax.swing.JFrame {
     private void initComponents() {
 
         LocationChoice = new javax.swing.ButtonGroup();
+        TimeScaleChoice = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jStation209 = new javax.swing.JRadioButton();
-        jNoStation = new javax.swing.JRadioButton();
         jStation215 = new javax.swing.JRadioButton();
         jStation251 = new javax.swing.JRadioButton();
         jStation235 = new javax.swing.JRadioButton();
@@ -257,6 +271,10 @@ public class MapViewTest extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jTextOpening = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTimeWhole = new javax.swing.JRadioButton();
+        jTimeYear = new javax.swing.JRadioButton();
+        jYearBox = new javax.swing.JComboBox<>();
         jSplitPane2 = new javax.swing.JSplitPane();
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
@@ -274,17 +292,6 @@ public class MapViewTest extends javax.swing.JFrame {
         jStation209.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jStation209ActionPerformed(evt);
-            }
-        });
-
-        jNoStation.setBackground(new java.awt.Color(0, 0, 0));
-        LocationChoice.add(jNoStation);
-        jNoStation.setText("None");
-        jNoStation.setToolTipText("None");
-        jNoStation.setOpaque(false);
-        jNoStation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNoStationActionPerformed(evt);
             }
         });
 
@@ -472,6 +479,7 @@ public class MapViewTest extends javax.swing.JFrame {
 
         jStation330.setBackground(new java.awt.Color(0, 0, 0));
         LocationChoice.add(jStation330);
+        jStation330.setSelected(true);
         jStation330.setToolTipText("Hoek van Holland");
         jStation330.setOpaque(false);
         jStation330.addActionListener(new java.awt.event.ActionListener() {
@@ -561,7 +569,6 @@ public class MapViewTest extends javax.swing.JFrame {
         });
 
         jLayeredPane1.setLayer(jStation209, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jNoStation, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation215, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation251, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation235, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -643,9 +650,6 @@ public class MapViewTest extends javax.swing.JFrame {
                         .addComponent(jStation348)
                         .addGap(130, 130, 130)
                         .addComponent(jStation275))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jNoStation))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addComponent(jStation235))
@@ -766,9 +770,7 @@ public class MapViewTest extends javax.swing.JFrame {
                             .addComponent(jStation319))))
                 .addGap(58, 58, 58)
                 .addComponent(jStation380)
-                .addGap(27, 27, 27)
-                .addComponent(jNoStation)
-                .addContainerGap())
+                .addGap(57, 57, 57))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -811,6 +813,33 @@ public class MapViewTest extends javax.swing.JFrame {
 
         jLabel7.setText("Opening");
 
+        jLabel8.setText("To View:");
+
+        TimeScaleChoice.add(jTimeWhole);
+        jTimeWhole.setSelected(true);
+        jTimeWhole.setText("Entire Dataset");
+        jTimeWhole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTimeWholeActionPerformed(evt);
+            }
+        });
+
+        TimeScaleChoice.add(jTimeYear);
+        jTimeYear.setText("Specific Year");
+        jTimeYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTimeYearActionPerformed(evt);
+            }
+        });
+
+        jYearBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jYearBox.setEnabled(false);
+        jYearBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jYearBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -820,34 +849,50 @@ public class MapViewTest extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(jTextNum)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(61, 61, 61)
-                            .addComponent(jTextOpening))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(54, 54, 54)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextLat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                        .addComponent(jTextHeight)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(56, 56, 56))
+                            .addComponent(jTimeWhole)
+                            .addComponent(jTimeYear))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGap(31, 31, 31)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                            .addComponent(jTextNum)))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(54, 54, 54)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jTextLat, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                                    .addComponent(jTextHeight)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(61, 61, 61)
+                                .addComponent(jTextOpening))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jYearBox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(56, 56, 56))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -879,7 +924,15 @@ public class MapViewTest extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jTextOpening, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 419, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTimeWhole)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTimeYear)
+                .addGap(3, 3, 3)
+                .addComponent(jYearBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162))
         );
@@ -1049,19 +1102,28 @@ public class MapViewTest extends javax.swing.JFrame {
         updateInfo(n);
     }//GEN-LAST:event_jStation215ActionPerformed
 
-    private void jNoStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNoStationActionPerformed
-        jTextNum.setText("");
-        jTextName.setText("");
-        jTextLong.setText("");
-        jTextLat.setText("");
-        jTextHeight.setText("");
-        jTextOpening.setText("");
-    }//GEN-LAST:event_jNoStationActionPerformed
-
     private void jStation209ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation209ActionPerformed
         int n = findStationNrIndex(209);
         updateInfo(n);
     }//GEN-LAST:event_jStation209ActionPerformed
+
+    private void jTimeYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeYearActionPerformed
+        jYearBox.setEnabled(true);
+        timeYear = true;
+    }//GEN-LAST:event_jTimeYearActionPerformed
+
+    private void jTimeWholeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeWholeActionPerformed
+        jYearBox.setEnabled(false);
+        timeYear = false;
+    }//GEN-LAST:event_jTimeWholeActionPerformed
+
+    private void jYearBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jYearBoxActionPerformed
+        System.out.println("ZOOP");
+        if (jYearBox.getSelectedItem()!=null){
+            selectedYear = Integer.parseInt((String) jYearBox.getSelectedItem());
+        }
+        System.out.println(selectedYear);
+    }//GEN-LAST:event_jYearBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1101,6 +1163,7 @@ public class MapViewTest extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.ButtonGroup LocationChoice;
+    private javax.swing.ButtonGroup TimeScaleChoice;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1109,8 +1172,8 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JRadioButton jNoStation;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
@@ -1150,6 +1213,9 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JTextField jTextName;
     private javax.swing.JTextField jTextNum;
     private javax.swing.JTextField jTextOpening;
+    private javax.swing.JRadioButton jTimeWhole;
+    private javax.swing.JRadioButton jTimeYear;
+    private javax.swing.JComboBox<String> jYearBox;
     // End of variables declaration//GEN-END:variables
 }
 
