@@ -24,7 +24,7 @@ public class Station{
     private ArrayList<Double> tempavg, tempmin, 
             tempmax, windsp, winddir, percipation, pressure;
     
-    private HashMap A;
+    private HashMap<String,ArrayList<Double>> A;
     
     public Station(int stationNum, String stationName, float longitude, float latitude, float height, String opening){
         this.stationNum = stationNum;
@@ -44,7 +44,7 @@ public class Station{
         attributts[6] = "percipation";
         attributts[7] = "pressure";
         
-        A = new HashMap();
+        A = new HashMap<String,ArrayList<Double>>();
         for (String i: attributts){
             A.put(i, new ArrayList<Double>());
         }

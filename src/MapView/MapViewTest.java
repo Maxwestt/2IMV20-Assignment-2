@@ -71,7 +71,7 @@ public class MapViewTest extends javax.swing.JFrame {
             ioe.printStackTrace();
         }
         
-        HashMap H = new HashMap();
+        HashMap<Integer,Station> H = new HashMap<Integer,Station>();
         for (int snum: stationnumbers){
             //System.out.println(stations.get(stationnumbers.indexOf(snum)));
             H.put(snum, stations.get(stationnumbers.indexOf(snum)));
@@ -105,12 +105,11 @@ public class MapViewTest extends javax.swing.JFrame {
                     //System.out.println(H.get(snum));
                     for (int i = 1; i < attributes.length; i++){
                         //System.out.println(H.get(snum).getClass());
-                        Station curst = (Station)(H.get(snum));
-                        ArrayList<Double> arr = (ArrayList<Double>) (curst.getMap().get(attributts[i-1]));
+                        ArrayList<Double> al = (ArrayList<Double>) (H.get(snum).getMap().get(attributts[i-1]));
                         if (attributes[i].replaceAll("\\s+","").isEmpty()){
-                            arr.add(Double.NaN);
+                            al.add(Double.NaN);
                         } else {
-                            arr.add(Double.parseDouble(attributes[i]));
+                            al.add(Double.parseDouble(attributes[i]));
                         }
                         //((ArrayList<Double>)(((Station) H.get(snum)).getMap()).get(attributts[i]));
                     }
