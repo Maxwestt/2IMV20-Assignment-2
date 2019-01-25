@@ -7,8 +7,10 @@ package MapView;
 
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -33,10 +35,23 @@ import org.jfree.experimental.swt.SWTUtils;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.shape.Circle;
 import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.panel.CrosshairOverlay;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.ui.RectangleEdge;
 
 
@@ -44,16 +59,29 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
     ChartPanel chartPanel;
     private Crosshair xCrosshair;
     private Crosshair yCrosshair;
+    ArrayList<Double> datax;
+    ArrayList<Double> datay;
+    int year;
+    boolean alldata;
     
-    public VisLineChartEx() {
+    public VisLineChartEx(ArrayList<Double> datax, ArrayList<Double> datay, int year, boolean alldata) { 
+        this.datax = datax;
+        this.datay = datay;
+        this.year = year;
+        this.alldata = alldata;
+        
         initUI();
+        // default size
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        setLayout(new BorderLayout());
+        add(chartPanel, BorderLayout.NORTH);
     }
 
     private void initUI() {
         XYDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset);
         chartPanel = new ChartPanel(chart);
-        chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        chartPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         chartPanel.setBackground(Color.white);
         
         CrosshairOverlay crosshairOverlay = new CrosshairOverlay();
@@ -78,15 +106,26 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 
     private XYDataset createDataset() {
 
-        XYSeries series = new XYSeries("2016");
-        series.add(18, 567);
-        series.add(20, 612);
-        series.add(25, 800);
-        series.add(30, 980);
-        series.add(40, 1410);
-        series.add(50, 2350);
-
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        TimeSeries series = new TimeSeries("data");
+        //System.out.println(datax.size());
+        for(int i = 0; i < datax.size(); i++){
+            
+                try {
+                    Date temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", datax.get(i)));
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(temp);
+                    if(calendar.get(Calendar.YEAR) == year || alldata){
+                        Day day = new Day(temp);
+                        //System.out.println(temp.);
+                        series.add(day, datay.get(i));   
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(VisLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            
+        }
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(series);
 
         
@@ -99,21 +138,21 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
     
     private JFreeChart createChart(XYDataset dataset) {
          
-        JFreeChart chart = ChartFactory.createXYLineChart(
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
                 "Average salary per age", 
-                "Age", 
+                "Date", 
                 "Salary (€)", 
                 dataset, 
-                PlotOrientation.VERTICAL,
+                //PlotOrientation.VERTICAL,
                 true, 
                 true, 
                 false 
         );
         XYPlot plot = chart.getXYPlot();
-        
+        //plot.getRangeAxis().setRange();
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.RED);
-        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+        renderer.setSeriesStroke(0, new BasicStroke(.3f));
 
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(Color.white);
@@ -123,10 +162,13 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 
         plot.setDomainGridlinesVisible(true);
         plot.setDomainGridlinePaint(Color.BLACK);
+        
+        Rectangle rect = new Rectangle(0,0);
+        renderer.setSeriesShape(0, rect);
 
         chart.getLegend().setFrame(BlockBorder.NONE);
 
-        chart.setTitle(new TextTitle("Average Salary per Age",
+        chart.setTitle(new TextTitle("Average Salary per Age",  
                         new Font("Serif", java.awt.Font.BOLD, 18)
                 )
         );
@@ -137,13 +179,13 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 
     
     
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(() -> {
-            VisLineChartEx ex = new VisLineChartEx();
-            ex.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//
+//        SwingUtilities.invokeLater(() -> {
+//            VisLineChartEx ex = new VisLineChartEx());
+//            ex.setVisible(true);
+//        });
+//    }
 
     @Override
     public void chartMouseClicked(ChartMouseEvent cme) {

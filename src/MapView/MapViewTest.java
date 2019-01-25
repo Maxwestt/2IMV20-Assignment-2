@@ -36,13 +36,14 @@ public class MapViewTest extends javax.swing.JFrame {
     int stationNum;
     String stationName, opening;
     float longitude, latitude, height;
-    
+    HashMap<Integer,Station> H;
     ArrayList<Integer> stationnumbers = new ArrayList<Integer>();
     
     public MapViewTest() {
+        H = new HashMap<>();
         initComponents();
         loadStations();
-        
+        stationNum = stations.get(0).getNum();
         setChart1();
     }
     
@@ -71,7 +72,7 @@ public class MapViewTest extends javax.swing.JFrame {
             ioe.printStackTrace();
         }
         
-        HashMap<Integer,Station> H = new HashMap<Integer,Station>();
+       
         for (int snum: stationnumbers){
             //System.out.println(stations.get(stationnumbers.indexOf(snum)));
             H.put(snum, stations.get(stationnumbers.indexOf(snum)));
@@ -80,15 +81,15 @@ public class MapViewTest extends javax.swing.JFrame {
         
         System.out.println(H.keySet());
         
-        String[] attributts = new String[8];
-        attributts[0] = "time";
-        attributts[1] = "winddir";
-        attributts[2] = "windsp";
-        attributts[3] = "tempavg";
-        attributts[4] = "tempmin";
-        attributts[5] = "tempmax";
-        attributts[6] = "percipation";
-        attributts[7] = "pressure";
+        String[] stringAtts = new String[8];
+        stringAtts[0] = "time";
+        stringAtts[1] = "winddir";
+        stringAtts[2] = "windsp";
+        stringAtts[3] = "tempavg";
+        stringAtts[4] = "tempmin";
+        stringAtts[5] = "tempmax";
+        stringAtts[6] = "percipation";
+        stringAtts[7] = "pressure";
         
         try{
             BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/KNMI_reduced.txt"));
@@ -105,7 +106,7 @@ public class MapViewTest extends javax.swing.JFrame {
                     //System.out.println(H.get(snum));
                     for (int i = 1; i < attributes.length; i++){
                         //System.out.println(H.get(snum).getClass());
-                        ArrayList<Double> al = (ArrayList<Double>) (H.get(snum).getMap().get(attributts[i-1]));
+                        ArrayList<Double> al = (ArrayList<Double>) (H.get(snum).getMap().get(stringAtts[i-1]));
                         if (attributes[i].replaceAll("\\s+","").isEmpty()){
                             al.add(Double.NaN);
                         } else {
@@ -125,7 +126,9 @@ public class MapViewTest extends javax.swing.JFrame {
     public void setChart1(){
         VisLineChart b = new VisLineChart("", "");
         PieChartA a = new PieChartA("", "");
-        VisLineChartEx c = new VisLineChartEx();
+        ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(235).getMap().get("time")));
+        ArrayList<Double> ydata = ((ArrayList<Double>) (H.get(235).getMap().get("tempavg")));
+        VisLineChartEx c = new VisLineChartEx(xdata, ydata, 2002, false);
         //setLayout(new BorderLayout());
         //this.jSplitPane1.setBottomComponent(a);
         Icon icon = jLabel1.getIcon();
