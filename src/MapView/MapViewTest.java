@@ -131,6 +131,20 @@ public class MapViewTest extends javax.swing.JFrame {
             c = new VisLineChartEx(xdata, ydata, -1);
         }
         
+        VisLineChartMultiple d;
+        
+        ArrayList<Double> xdata1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));
+        ArrayList<Double> ydata1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+        ArrayList<Double> ydata2 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmin")));
+        ArrayList<Double> ydata3 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmax")));
+        
+        
+        if (timeYear){
+            d = new VisLineChartMultiple(xdata1, ydata1, ydata2, ydata3, selectedYear);
+        } else {
+            d = new VisLineChartMultiple(xdata1, ydata1, ydata2, ydata3, -1);
+        }
+        
         //setLayout(new BorderLayout());
         //this.jSplitPane1.setBottomComponent(a);
         Icon icon = jLabel1.getIcon();
@@ -166,6 +180,7 @@ public class MapViewTest extends javax.swing.JFrame {
         this.jSplitPane3.setTopComponent(b);
         this.jSplitPane4.setTopComponent(a);
         this.jSplitPane4.setBottomComponent(c);
+        this.jSplitPane3.setBottomComponent(d);
         //JFrame frame = new JFrame();
         //this.add(a);
         //this.pack();
