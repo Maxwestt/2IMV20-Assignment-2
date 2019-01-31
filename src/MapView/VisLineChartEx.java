@@ -35,6 +35,8 @@ import org.jfree.experimental.swt.SWTUtils;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,12 +48,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.shape.Circle;
 import org.jfree.chart.ChartMouseEvent;
+import org.jfree.chart.annotations.XYPointerAnnotation;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTickUnit;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.TickUnits;
+import org.jfree.chart.entity.ChartEntity;
+import org.jfree.chart.event.ChartProgressEvent;
+import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.panel.CrosshairOverlay;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.time.TimeSeriesDataItem;
 import org.jfree.ui.RectangleEdge;
 
 
@@ -63,6 +74,7 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
     ArrayList<Double> datay;
     int year;
     boolean alldata;
+    TimeSeriesDataItem item;
     
     public VisLineChartEx(ArrayList<Double> datax, ArrayList<Double> datay, int year, boolean alldata) { 
         this.datax = datax;
@@ -73,111 +85,159 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
         initUI();
         // default size
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        setLayout(new BorderLayout());
-        add(chartPanel, BorderLayout.NORTH);
+        this.setLayout(new BorderLayout());
+        this.add(chartPanel, BorderLayout.NORTH);
     }
 
     private void initUI() {
         XYDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset);
         chartPanel = new ChartPanel(chart);
-        chartPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        chartPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         chartPanel.setBackground(Color.white);
         
         CrosshairOverlay crosshairOverlay = new CrosshairOverlay();
-        this.xCrosshair = new Crosshair(Double.NaN, Color.RED,
-                new BasicStroke(0f));
-        this.xCrosshair.setLabelVisible(true);
-        this.yCrosshair = new Crosshair(Double.NaN, Color.GRAY,
-                new BasicStroke(0f));
-        this.yCrosshair.setLabelVisible(true);
+        xCrosshair = new Crosshair(Double.NaN, Color.GRAY, new BasicStroke(1f));
+        xCrosshair.setLabelVisible(true);
+        yCrosshair = new Crosshair(Double.NaN, Color.GRAY, new BasicStroke(1f));
+        yCrosshair.setLabelVisible(true);
+        xCrosshair.setLabelOutlineVisible(false);
+        yCrosshair.setLabelOutlineVisible(false);
         crosshairOverlay.addDomainCrosshair(xCrosshair);
         crosshairOverlay.addRangeCrosshair(yCrosshair);
-        this.chartPanel.addOverlay(crosshairOverlay);
-        add(this.chartPanel);
+        xCrosshair.setLabelGenerator(new CrosshairLabelGenerator() {
+            @Override
+            public String generateLabel(Crosshair crshr) {
+                String converted = new SimpleDateFormat("dd MMM").format(crshr.getValue());   
+                return " "+converted+" ";
+            }
+        });
         
+         yCrosshair.setLabelGenerator(new CrosshairLabelGenerator() {
+            @Override
+            public String generateLabel(Crosshair crshr) {
+                String converted = new DecimalFormat("0.0").format(crshr.getValue());   
+                return " "+converted+" ";
+            }
+        }); 
+        chartPanel.addOverlay(crosshairOverlay);
+        chartPanel.addChartMouseListener(this);
         
-
-//        pack();
-//        setTitle("Line chart");
-//        setLocationRelativeTo(null);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+            
     }
 
     private XYDataset createDataset() {
-
         TimeSeries series = new TimeSeries("data");
         //System.out.println(datax.size());
-        for(int i = 0; i < datax.size(); i++){
-            
-                try {
-                    Date temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", datax.get(i)));
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(temp);
-                    if(calendar.get(Calendar.YEAR) == year || alldata){
-                        Day day = new Day(temp);
-                        //System.out.println(temp.);
-                        series.add(day, datay.get(i));   
-                    }
-                } catch (ParseException ex) {
-                    Logger.getLogger(VisLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+        for (int i = 0; i < datax.size(); i++) {
+            try {
+                Date temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", datax.get(i)));
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(temp);
+                if (calendar.get(Calendar.YEAR) == year || alldata) {
+                    Day day = new Day(temp);
+                    //System.out.println(temp.);
+                    series.add(day, datay.get(i));
                 }
-                
-            
+            } catch (ParseException ex) {
+                Logger.getLogger(VisLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(series);
-
-        
+        //item = series.getDataItem(series.getItemCount() - 1);
         return dataset;
     }
-
-    
-    
     
     
     private JFreeChart createChart(XYDataset dataset) {
-         
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
-                "Average salary per age", 
-                "Date", 
-                "Salary (€)", 
+                "Average temperature per year", 
+                "", 
+                "", 
                 dataset, 
                 //PlotOrientation.VERTICAL,
-                true, 
-                true, 
+                false, 
+                false, 
                 false 
         );
         XYPlot plot = chart.getXYPlot();
-        //plot.getRangeAxis().setRange();
+        ((DateAxis) plot.getDomainAxis()).setDateFormatOverride(new SimpleDateFormat("MMM-yy"));
+//        if(!alldata){
+//            ((DateAxis) plot.getDomainAxis()).setTickUnit(new DateTickUnit(DateTickUnit.MONTH, 1));
+//        }
+        
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesPaint(0, Color.RED);
-        renderer.setSeriesStroke(0, new BasicStroke(.3f));
+        renderer.setSeriesStroke(0, new BasicStroke(1f));
 
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(Color.white);
-
+        plot.setDomainCrosshairVisible(false);
+        plot.setRangeCrosshairVisible(false);
         plot.setRangeGridlinesVisible(true);
+        
         plot.setRangeGridlinePaint(Color.BLACK);
 
-        plot.setDomainGridlinesVisible(true);
+        plot.setDomainGridlinesVisible(false    );
         plot.setDomainGridlinePaint(Color.BLACK);
         
         Rectangle rect = new Rectangle(0,0);
         renderer.setSeriesShape(0, rect);
-
-        chart.getLegend().setFrame(BlockBorder.NONE);
-
-        chart.setTitle(new TextTitle("Average Salary per Age",  
-                        new Font("Serif", java.awt.Font.BOLD, 18)
+        //chart.getLegend().setFrame(BlockBorder.NONE);
+        
+  
+        chart.setTitle(new TextTitle("Average Temperature per Day",  
+                        new Font("SansSerif", java.awt.Font.PLAIN, 12)
                 )
         );
 
+       
         return chart;
 
     }
 
     
+    @Override
+    public void chartMouseMoved(ChartMouseEvent cme) {
+        Rectangle2D dataArea = chartPanel.getScreenDataArea();
+        JFreeChart chart = cme.getChart();
+        XYPlot plot = (XYPlot) chart.getPlot();
+        ValueAxis xAxis = plot.getDomainAxis();
+        double x = xAxis.java2DToValue(cme.getTrigger().getX(), dataArea,
+                RectangleEdge.BOTTOM);
+        
+        double y = DatasetUtilities.findYValue(plot.getDataset(), 0, x);
+        this.xCrosshair.setLabelBackgroundPaint(new Color(1f, 1f, 1f, 1f));
+        this.xCrosshair.setLabelFont(yCrosshair.getLabelFont().deriveFont(20f));
+        this.yCrosshair.setLabelBackgroundPaint(new Color(1f, 1f, 1f, 1f));
+        this.yCrosshair.setLabelFont(yCrosshair.getLabelFont().deriveFont(20f));
+        
+        this.xCrosshair.setValue(x);
+        this.yCrosshair.setValue(y);
+//
+//        ChartEntity ce = cme.getEntity();
+//
+//        double xs = item.getPeriod().getFirstMillisecond();
+//        double ys = item.getValue().doubleValue();
+        //cme.getEntity().setToolTipText("sank");
+        //double x = cme.g
+        //XYPointerAnnotation a = new XYPointerAnnotation("Bam!", xs, ys, 5 * Math.PI / 8);
+        //XYPlot plot = (XYPlot) chart.getPlot();
+        //plot.addAnnotation(a);
+
+        //if (ce instanceof XYAnnotationEntity) {
+        // handle the click
+        //}
+    }
+
+    @Override
+    public void chartMouseClicked(ChartMouseEvent cme) {
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+        
     
 //    public static void main(String[] args) {
 //
@@ -187,26 +247,5 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 //        });
 //    }
 
-    @Override
-    public void chartMouseClicked(ChartMouseEvent cme) {
-        System.out.println("asdasd");
-    }
-
-    @Override
-    public void chartMouseMoved(ChartMouseEvent event) {
-            Rectangle2D dataArea = chartPanel.getScreenDataArea();
-            JFreeChart chart = event.getChart();
-            XYPlot plot = (XYPlot) chart.getPlot();
-            ValueAxis xAxis = plot.getDomainAxis();
-            double x = xAxis.java2DToValue(event.getTrigger().getX(), dataArea, 
-                    RectangleEdge.BOTTOM);
-            // make the crosshairs disappear if the mouse is out of range
-            if (!xAxis.getRange().contains(x)) { 
-                x = Double.NaN;                  
-            }
-            double y = DatasetUtilities.findYValue(plot.getDataset(), 0, x);
-            this.xCrosshair.setValue(x);
-            this.yCrosshair.setValue(y);
-    }
 }
 
