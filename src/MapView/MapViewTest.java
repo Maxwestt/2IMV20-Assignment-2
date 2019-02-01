@@ -301,7 +301,7 @@ public class MapViewTest extends javax.swing.JFrame {
         //this.jSplitPane1.setBottomComponent(a);
         for(int i: StationButtons.keySet()){
             int xi = StationButtons.get(i).x/10;
-            int yi = heatMap[0].length-(StationButtons.get(i).y/10)-2;
+            int yi = heatMap[0].length-(StationButtons.get(i).y/10)-1;
             ArrayList<Double> times = (ArrayList<Double>) stations.get(i).getMap().get("time");
             ArrayList<Double> temps = (ArrayList<Double>) stations.get(i).getMap().get("tempavg");
             double runningavg = 0;
@@ -314,8 +314,8 @@ public class MapViewTest extends javax.swing.JFrame {
                     calendar.setTime(temp);
                     //if (year > 0){
                     
-                        if(calendar.get(Calendar.MONTH) == selectedMonth &&calendar.get(Calendar.YEAR) == selectedYear){
-                            System.out.println("year:" +calendar.get(Calendar.YEAR));
+                        if(calendar.get(Calendar.MONTH) == selectedMonth-1 &&calendar.get(Calendar.YEAR) == selectedYear){
+                            //System.out.println("year:" +calendar.get(Calendar.YEAR));
                                     
                             //System.out.println(calendar.get(Calendar.MONTH));
                             double curt = temps.get(j);
@@ -405,9 +405,18 @@ public class MapViewTest extends javax.swing.JFrame {
         float alpha = .8f;
         g.setComposite(AlphaComposite.SrcOver.derive(alpha));
         g.drawImage(dimg,0,0,null);
+        
         g.dispose();
+        for(int k = 0; k<nlimg.getWidth();k++){
+            for(int l = 0; l<nlimg.getHeight();l++){
+                if (new Color(nlimg.getRGB(k,l)).equals(Color.WHITE)){
+                    combined.setRGB(k, l, new Color(135,206,250).getRGB());
+                }
+            }
+        }
         
         jLabel1.setIcon(new ImageIcon(combined));
+        
         //System.out.println(((ArrayList<Double>)stations.get(findStationNrIndex(275)).getMap().get("windsp")).get(1000));
     }
     
@@ -415,7 +424,7 @@ public class MapViewTest extends javax.swing.JFrame {
         for(int i = -2; i<3;i++){
             for(int j = -2;j<3;j++){
                 if(!(Math.abs(i)+Math.abs(j)>3)){
-                    addP(a, x+i, y+j, a[x][y]);//*(0.7*str+0.3*(str/(Math.abs(i)+Math.abs(j)))));   
+                    addP(a, x+i, y+j, a[x][y]);//*(0.7+0.3/((Math.abs(i)+Math.abs(j)+0.1))));   
                 }
             }
         }
