@@ -279,7 +279,7 @@ public class MapViewTest extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MapViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        heatMap = new double[nlimg.getWidth()/30][nlimg.getHeight()/30];
+        heatMap = new double[nlimg.getWidth()/20][nlimg.getHeight()/20];
         for (int i = 0; i < heatMap.length; i++) {
             for (int j = 0; j < heatMap[0].length; j++) {
                 heatMap[i][j] = -9999.9;
@@ -292,8 +292,8 @@ public class MapViewTest extends javax.swing.JFrame {
         //setLayout(new BorderLayout());
         //this.jSplitPane1.setBottomComponent(a);
         for(int i: StationButtons.keySet()){
-            int xi = StationButtons.get(i).x/30;
-            int yi = heatMap[0].length-(StationButtons.get(i).y/30);
+            int xi = StationButtons.get(i).x/20;
+            int yi = heatMap[0].length-(StationButtons.get(i).y/20);
             ArrayList<Integer> times = (ArrayList<Integer>) stations.get(i).getMap().get("time");
             ArrayList<Double> temps = (ArrayList<Double>) stations.get(i).getMap().get("windsp");
             double runningavg = 0;
@@ -304,7 +304,7 @@ public class MapViewTest extends javax.swing.JFrame {
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(temp);
                     //if (year > 0){
-                        if(calendar.get(Calendar.MONTH) == selectedMonth&&calendar.get(Calendar.YEAR) == 2000){
+                        if(calendar.get(Calendar.MONTH) == selectedMonth&&calendar.get(Calendar.YEAR) == selectedYear){
                             double curt = temps.get(i);
                             if(!Double.isNaN(curt)){
                                 runningavg += curt;
@@ -317,10 +317,19 @@ public class MapViewTest extends javax.swing.JFrame {
             }
             if(totalm>0){
                 heatMap[xi][yi] = runningavg/totalm;
-                //heatMap[xi+1][yi] = runningavg/totalm/2;
-                //heatMap[xi][yi-1] = runningavg/totalm/2;
-                //heatMap[xi+1][yi-1] = runningavg/totalm/2;
-//                heatMap[xi-1][yi] = runningavg/totalm;
+                if(xi+1<heatMap.length){
+                    heatMap[xi+1][yi] = runningavg/totalm;
+                }
+                if(yi+1<heatMap[0].length){
+                    heatMap[xi][yi+1] = runningavg/totalm;
+                }
+                if(yi+1<heatMap[0].length&&xi+1<heatMap.length){
+                    heatMap[xi+1][yi+1] = runningavg/totalm;
+                }
+                
+//                heatMap[xi+1][yi+1] = runningavg/totalm;
+//                heatMap[xi][yi+1] = runningavg/totalm;
+////                heatMap[xi-1][yi] = runningavg/totalm;
 //                heatMap[xi][yi-1] = runningavg/totalm;
 //                heatMap[xi-1][yi-1] = runningavg/totalm;
 //                heatMap[xi-1][yi+1] = runningavg/totalm;
@@ -382,7 +391,7 @@ public class MapViewTest extends javax.swing.JFrame {
         //g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
         g2d.dispose();
         
-        BufferedImage resized = new BufferedImage(nlimg.getHeight(),nlimg.getWidth(), rotated.getType());
+        BufferedImage resized = new BufferedImage(nlimg.getWidth(),nlimg.getHeight(), rotated.getType());
         Graphics2D g3 = resized.createGraphics();
         g3.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
         RenderingHints.VALUE_INTERPOLATION_BILINEAR);
