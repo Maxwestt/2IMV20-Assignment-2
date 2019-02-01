@@ -130,7 +130,7 @@ public class MapViewTest extends javax.swing.JFrame {
                         if (attributes[i].replaceAll("\\s+","").isEmpty()){
                             al.add(Double.NaN);
                         } else {
-                            if (i > 1){
+                            if (i > 2){
                                 al.add(Double.parseDouble(attributes[i])/10.0);
                             }
                             else{
@@ -146,15 +146,23 @@ public class MapViewTest extends javax.swing.JFrame {
         
         setUpHeatmap();
     }
-  
-    
     
     public void setChart1(){
         
         VisLineChart b = new VisLineChart("", "");
-        PieChartA a = new PieChartA("", "");
+        ArrayList<Double> dirData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("winddir")));
+        ArrayList<Double> speedData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("windsp")));
         ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));
         ArrayList<Double> ydata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+        
+        PolarLineChartExample a; 
+        if (timeYear){
+            a = new PolarLineChartExample(xdata, dirData1, speedData1, selectedYear);
+        } else {
+            a = new PolarLineChartExample(xdata, dirData1, speedData1, -1);
+        }
+        
+        
         VisLineChartEx c;
         if (timeYear){
             c = new VisLineChartEx(xdata, ydata, selectedYear);
