@@ -8,7 +8,9 @@ import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
@@ -287,33 +289,44 @@ public class MapViewTest extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MapViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        heatMap = new double[nlimg.getWidth()/20][nlimg.getHeight()/20];
+
+        
+    }
+    
+    
+
+
+    
+    public void genHeatmap(){
+        
+        heatMap = new double[nlimg.getWidth()/10][nlimg.getHeight()/10];
         for (int i = 0; i < heatMap.length; i++) {
             for (int j = 0; j < heatMap[0].length; j++) {
                 heatMap[i][j] = -9999.9;
             }
         }
-        
-    }
-    
-    public void genHeatmap(){
         //setLayout(new BorderLayout());
         //this.jSplitPane1.setBottomComponent(a);
         for(int i: StationButtons.keySet()){
-            int xi = StationButtons.get(i).x/20;
-            int yi = heatMap[0].length-(StationButtons.get(i).y/20);
-            ArrayList<Integer> times = (ArrayList<Integer>) stations.get(i).getMap().get("time");
-            ArrayList<Double> temps = (ArrayList<Double>) stations.get(i).getMap().get("windsp");
+            int xi = StationButtons.get(i).x/10;
+            int yi = heatMap[0].length-(StationButtons.get(i).y/10)-2;
+            ArrayList<Double> times = (ArrayList<Double>) stations.get(i).getMap().get("time");
+            ArrayList<Double> temps = (ArrayList<Double>) stations.get(i).getMap().get("tempavg");
             double runningavg = 0;
             double totalm = 0;
             for(int j = 0; j<times.size(); j++){
                 try {
-                    Date temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", times.get(j)));
+                    //System.out.println(Integer.toString(times.get(j).intValue()));
+                    Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times.get(j).intValue()));
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(temp);
                     //if (year > 0){
-                        if(calendar.get(Calendar.MONTH) == selectedMonth&&calendar.get(Calendar.YEAR) == selectedYear){
-                            double curt = temps.get(i);
+                    
+                        if(calendar.get(Calendar.MONTH) == selectedMonth &&calendar.get(Calendar.YEAR) == selectedYear){
+                            System.out.println("year:" +calendar.get(Calendar.YEAR));
+                                    
+                            //System.out.println(calendar.get(Calendar.MONTH));
+                            double curt = temps.get(j);
                             if(!Double.isNaN(curt)){
                                 runningavg += curt;
                                 totalm++;
@@ -325,15 +338,7 @@ public class MapViewTest extends javax.swing.JFrame {
             }
             if(totalm>0){
                 heatMap[xi][yi] = runningavg/totalm;
-                if(xi+1<heatMap.length){
-                    heatMap[xi+1][yi] = runningavg/totalm;
-                }
-                if(yi+1<heatMap[0].length){
-                    heatMap[xi][yi+1] = runningavg/totalm;
-                }
-                if(yi+1<heatMap[0].length&&xi+1<heatMap.length){
-                    heatMap[xi+1][yi+1] = runningavg/totalm;
-                }
+                populateNeighbours(heatMap, xi, yi, 1.0);
                 
 //                heatMap[xi+1][yi+1] = runningavg/totalm;
 //                heatMap[xi][yi+1] = runningavg/totalm;
@@ -376,67 +381,75 @@ public class MapViewTest extends javax.swing.JFrame {
         hmap.setLowValueColour(Color.WHITE);
         hmap.setColourScale(1.3);
         hmap.setChartMargin(0);
+        //hmap.setCellSize(new Dimension(nlimg.getHeight()/20, nlimg.getWidth()/20));
         BufferedImage heatmapimg = (BufferedImage) hmap.getChartImage();
+       
         
-        double rads = Math.toRadians(270);
-        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
-        int w = heatmapimg.getWidth();
-        int h = heatmapimg.getHeight();
-        int newWidth = (int) Math.floor(w * cos + h * sin);
-        int newHeight = (int) Math.floor(h * cos + w * sin);
+        BufferedImage rotated = new BufferedImage(heatmapimg.getHeight(), heatmapimg.getWidth(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = (Graphics2D) rotated.createGraphics();
 
-        BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = rotated.createGraphics();
-        AffineTransform at = new AffineTransform();
-        at.translate((newWidth - w) / 2, (newHeight - h) / 2);
-        int x = w / 2;
-        int y = h / 2;
-        at.rotate(rads, x, y);
-        //at.scale(2.0,2.00);
-        g2d.setTransform(at);
-        g2d.drawImage(heatmapimg, 0, 0, this);
-        //g2d.setColor(Color.RED);
-        //g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
+        AffineTransform xform = new AffineTransform();
+        xform.translate(0.5*heatmapimg.getHeight(), 0.5*heatmapimg.getWidth());
+        xform.rotate(Math.toRadians(270));
+        xform.translate(-0.5*heatmapimg.getWidth(), -0.5*heatmapimg.getHeight());
+        g2.drawImage(heatmapimg, xform, null);
+        g2.dispose();
+        
+        
+        Image resized = rotated.getScaledInstance(nlimg.getWidth(), nlimg.getHeight(), Image.SCALE_SMOOTH);
+        System.out.println(nlimg.getWidth());
+        System.out.println(nlmap.getIconHeight());
+        BufferedImage dimg = new BufferedImage(nlimg.getWidth(), nlimg.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(resized, 0, 0, null);
         g2d.dispose();
         
-        BufferedImage resized = new BufferedImage(nlimg.getWidth(),nlimg.getHeight(), rotated.getType());
-        Graphics2D g3 = resized.createGraphics();
-        g3.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-        RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g3.drawImage(rotated, 0, 0, nlimg.getWidth(), nlimg.getHeight(),null);
-        g3.dispose();
-       // g3.drawim
-        //AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        //rotatedfinal = scaleOp.filter(rotated, rotated);
-        //hmap.setXValuesHorizontal(timeYear);
-//        try {
-//            // Step 3: Output the chart to a file.
-//            hmap.saveToFile(new File("java-heat-chart.png"));
-//        } catch (IOException ex) {
-//            Logger.getLogger(MapViewTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         
-        System.out.println("done");
         
-        BufferedImage combined = new BufferedImage(nlmap.getIconWidth(), nlmap.getIconHeight(),BufferedImage.TYPE_INT_RGB);
+        BufferedImage combined = new BufferedImage(nlimg.getWidth(), nlimg.getHeight(),nlimg.getType());
         Graphics2D g = combined.createGraphics();
         g.setComposite(AlphaComposite.SrcOver);
         g.drawImage(nlimg, 0,0,null);
-        float alpha = 0.75f;
+        float alpha = .8f;
         g.setComposite(AlphaComposite.SrcOver.derive(alpha));
-        g.drawImage(resized,0,0,null);
+        g.drawImage(dimg,0,0,null);
         g.dispose();
-        jLabel1.setIcon(new ImageIcon(combined));
         
+        jLabel1.setIcon(new ImageIcon(combined));
+        //System.out.println(((ArrayList<Double>)stations.get(findStationNrIndex(275)).getMap().get("windsp")).get(1000));
+    }
+    
+    public void populateNeighbours(double[][] a, int x, int y,  double str){
+        for(int i = -2; i<3;i++){
+            for(int j = -2;j<3;j++){
+                if(!(Math.abs(i)+Math.abs(j)>3)){
+                    addP(a, x+i, y+j, a[x][y]);//*(0.7*str+0.3*(str/(Math.abs(i)+Math.abs(j)))));   
+                }
+            }
+        }
+    }
+    
+    private void addP(double[][] a, int x, int y, double d) {
+        if(x>=0&&x<a.length&&y>=0&&y<a[0].length){
+            if(a[x][y]<-9999){
+                a[x][y] = d;
+            }
+            else{
+                a[x][y] = (a[x][y]+d)/2;
+            }
+        }
     }
     
     public double interpedval(double[][] t, int x, int y) {
         double[][] temp2 = new double[t.length][t[0].length];
         double total_val = 0.0;
         double total_weight = 0.0;
+        if(t[x][y]>-9998.0){
+            return t[x][y];
+        }
         for (int i = 0; i < t.length; i++) {
             for (int j = 0; j < t[0].length; j++) {
-                if (!(t[i][j] < -9998)) {
+                if (!(t[i][j] < -9998)) { 
                     if (x == i && y == j) {
                         return t[i][j];
                     }
@@ -1495,6 +1508,8 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JRadioButton jTimeYear;
     private javax.swing.JComboBox<String> jYearBox;
     // End of variables declaration//GEN-END:variables
+
+
 }
 
 
