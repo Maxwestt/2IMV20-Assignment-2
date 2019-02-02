@@ -105,7 +105,7 @@ public class MapViewTest extends javax.swing.JFrame {
             //System.out.println(H.get(snum));
         }
         
-        System.out.println(H.keySet());
+        //System.out.println(H.keySet());
         
         String[] stringAtts = new String[8];
         stringAtts[0] = "time";
@@ -368,13 +368,13 @@ public class MapViewTest extends javax.swing.JFrame {
         }
         
         DecimalFormat df = new DecimalFormat("0.00");
-        for (int i = 0; i < interpHeatMap.length; i++) {
-            for (int j = 0; j < interpHeatMap[0].length; j++) {
-                System.out.print(df.format(interpHeatMap[i][j]) + " | ");
-            }
-            System.out.println("");
-        }
-        
+//        for (int i = 0; i < interpHeatMap.length; i++) {
+//            for (int j = 0; j < interpHeatMap[0].length; j++) {
+//                System.out.print(df.format(interpHeatMap[i][j]) + " | ");
+//            }
+//            System.out.println("");
+//        }
+//        
         HeatChart hmap = new HeatChart(interpHeatMap);
         hmap.setAxisThickness(0);
         hmap.setShowXAxisValues(false);
@@ -408,8 +408,8 @@ public class MapViewTest extends javax.swing.JFrame {
         
         
         Image resized = rotated.getScaledInstance(nlimg.getWidth(), nlimg.getHeight(), Image.SCALE_SMOOTH);
-        System.out.println(nlimg.getWidth());
-        System.out.println(nlmap.getIconHeight());
+        //System.out.println(nlimg.getWidth());
+        //System.out.println(nlmap.getIconHeight());
         BufferedImage dimg = new BufferedImage(nlimg.getWidth(), nlimg.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = dimg.createGraphics();
         g2d.drawImage(resized, 0, 0, null);
