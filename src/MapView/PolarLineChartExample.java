@@ -73,7 +73,7 @@ public class PolarLineChartExample extends JPanel {
                 maxWind = wo.getSpeed();
             }
         }
-        System.out.println(maxWind);
+        //System.out.println(maxWind);
       
       // Create dataset
       XYDataset dataset = getXYDataset(winds);
@@ -89,7 +89,6 @@ public class PolarLineChartExample extends JPanel {
 
       ChartPanel panel = new ChartPanel(chart);
       panel.setMouseZoomable(true);
-      panel.setPreferredSize(new java.awt.Dimension(500, 570));
       panel.setBackground(Color.white);
         this.setLayout(new BorderLayout());
         this.add(panel, BorderLayout.NORTH);
