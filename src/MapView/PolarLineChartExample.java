@@ -1,9 +1,11 @@
 package MapView;
 
 import java.awt.BasicStroke;
+import static java.awt.BasicStroke.CAP_ROUND;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,9 +64,16 @@ public class PolarLineChartExample extends JPanel {
         Collections.sort(winds, new Comparator<WindObj>() {
             @Override
             public int compare(WindObj o1, WindObj o2) {
-                return o1.getDirection().compareTo(o2.getDirection());
+                return(o1.getDirection().compareTo(o1.getDirection()));
             }
         });
+        double maxWind = 0;
+        for (WindObj wo: winds){
+            if (wo.getSpeed() > maxWind){
+                maxWind = wo.getSpeed();
+            }
+        }
+        System.out.println(maxWind);
       
       // Create dataset
       XYDataset dataset = getXYDataset(winds);
@@ -80,21 +89,23 @@ public class PolarLineChartExample extends JPanel {
 
       ChartPanel panel = new ChartPanel(chart);
       panel.setMouseZoomable(true);
-      panel.setPreferredSize(new java.awt.Dimension(500, 270));
+      panel.setPreferredSize(new java.awt.Dimension(500, 570));
       panel.setBackground(Color.white);
         this.setLayout(new BorderLayout());
         this.add(panel, BorderLayout.NORTH);
-        
         DefaultPolarItemRenderer renderer = new DefaultPolarItemRenderer();
-        PolarPlot plot = new PolarPlot(dataset, new NumberAxis(), renderer);
-        
-        renderer.setSeriesFilled(0, true);
+        //renderer.setShapesVisible(false);
+        renderer.setSeriesFilled(0, false);
         renderer.setSeriesPaint(0, Color.RED);
-        renderer.setSeriesStroke(0, new BasicStroke(.3f));
-        Rectangle rect = new Rectangle(0,0);
-        renderer.setSeriesShape(0, rect);
+        Stroke dashedStroke = new BasicStroke(0.0f, BasicStroke.CAP_ROUND, 
+        BasicStroke.JOIN_ROUND,0.0f,new float[]{0.0f,1e10f},1.0f);
         
-        plot.setRenderer(renderer);
+        renderer.setSeriesStroke(0, dashedStroke);
+//        Rectangle rect = new Rectangle(0,0);
+//        renderer.setSeriesShape(0, rect);
+        ((PolarPlot) chart.getPlot()).setRenderer(renderer);
+        
+        
    }
 
    private XYDataset getXYDataset(ArrayList<WindObj> winds) {

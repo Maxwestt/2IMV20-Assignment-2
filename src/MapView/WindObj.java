@@ -15,8 +15,14 @@ public class WindObj {
     Double speed;
     
     public WindObj(double direction, double speed){
-        this.direction = direction;
-        this.speed = speed;
+        this.direction = direction%360.0;
+        if (Double.isNaN(speed)){
+            this.speed = 0.0;
+        } else {
+            this.speed = speed;
+        }
+        
+        //this.speed = speed;
     }
     
     public Double getSpeed(){

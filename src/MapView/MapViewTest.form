@@ -350,7 +350,7 @@
                       <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="380" max="-2" attributes="0"/>
-                              <Component id="jStation274" min="-2" max="-2" attributes="0"/>
+                              <Component id="jStation273" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="206" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -475,7 +475,7 @@
                       <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
-                              <Component id="jStation274" min="-2" max="-2" attributes="0"/>
+                              <Component id="jStation273" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="465" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -491,6 +491,7 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="LocationChoice"/>
                     </Property>
+                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" value="IJmond"/>
                   </Properties>
                   <Events>
@@ -632,7 +633,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jStation275ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="jStation274">
+                <Component class="javax.swing.JRadioButton" name="jStation273">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="0" type="rgb"/>
@@ -643,7 +644,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Marknesse"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jStation274ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jStation273ActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jStation280">
