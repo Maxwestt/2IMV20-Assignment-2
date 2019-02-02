@@ -67,6 +67,7 @@ public final class MapViewTest extends javax.swing.JFrame {
     
     //UI Vars
     boolean timeYear;
+    boolean drawCharts;
     int selectedYear;
     int selectedMonth;
     String heatMapSelected;
@@ -77,6 +78,7 @@ public final class MapViewTest extends javax.swing.JFrame {
         stations = new ArrayList<>();
         H = new HashMap<>();
         hmapInitialized = false;
+        drawCharts=false;
         stationnumbers = new ArrayList<>();
         
         loadData();
@@ -89,12 +91,13 @@ public final class MapViewTest extends javax.swing.JFrame {
         
         //UI
         stationNum = stations.get(0).getNum();
+        
         setupUI();
     }
     
     public void setupUI(){
         updateInfo(0);
-        setChart1();
+        
         jYearBox.removeAllItems();
         timeYear = false;
         selectedYear = 2018;
@@ -115,6 +118,8 @@ public final class MapViewTest extends javax.swing.JFrame {
         jMonthBox.addItem("October");
         jMonthBox.addItem("November");
         jMonthBox.addItem("December");
+        drawCharts=true;
+        setChart1();
     }
     
     public void loadData(){
@@ -177,6 +182,9 @@ public final class MapViewTest extends javax.swing.JFrame {
     }
     
     public void setChart1(){
+        if(!drawCharts){
+            return;
+        }
         ArrayList<Double> dirData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("winddir")));
         ArrayList<Double> speedData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("windsp")));
         ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));

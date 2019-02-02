@@ -34,7 +34,7 @@ import org.jfree.util.LogContext;
 public class BoxAndWhiskerChart extends JPanel {
 
     /** Access to logging facilities. */
-    private static final LogContext LOGGER = Log.createContext(BoxAndWhiskerChart.class);
+    //private static final LogContext LOGGER = Log.createContext(BoxAndWhiskerChart.class);
 
     Station st;
     ArrayList<Station> stations;
@@ -45,7 +45,7 @@ public class BoxAndWhiskerChart extends JPanel {
         this.st = st;
         this.stations = stations;
         this.year = year;
-        stations.remove(st);
+        //stations.remove(st);
         BoxAndWhiskerCategoryDataset dataset = createSampleDataset();
 
         CategoryAxis xAxis = new CategoryAxis("Type");
@@ -53,7 +53,7 @@ public class BoxAndWhiskerChart extends JPanel {
         yAxis.setAutoRangeIncludesZero(false);
         BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
         renderer.setFillBox(false);
-        renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+        //renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
         CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
 
         JFreeChart chart = new JFreeChart(
@@ -92,55 +92,20 @@ public class BoxAndWhiskerChart extends JPanel {
         
         //First, add the dataset for the station
         
-        List list = new ArrayList();
+        ArrayList<ArrayList<Double>> list1;
+        list1 = new ArrayList<>();
         for (int i = 0; i < 12; i++){
-            list.add(new ArrayList<Double>());
+            list1.add(new ArrayList<Double>());
         }
         
-        ArrayList<Double> times = (ArrayList<Double>) st.getMap().get("time");
-        ArrayList<Double> temps = (ArrayList<Double>) st.getMap().get("tempavg");
-        
-        int begin;
-        int end;
-            if(year <0 ){
-                begin = 0;
-                end = temps.size();
-            }else{
-                begin = findApproxBeginIndex(year, temps);
-                end = Math.min((begin+467),temps.size());
-        }
-        
-        for (int i = 0; i < 12; i++){
-            
-            for(int j = begin; j<end; j++){
-                
-                try {
-                    Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times.get(j).intValue()));
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(temp);
-                        if((calendar.get(Calendar.YEAR) == year  &&  calendar.get(Calendar.MONTH) == i)|| year<0){
-//                            System.out.println("year:" +calendar.get(Calendar.YEAR) + " and month: " + calendar.get(Calendar.MONTH));   
-                            double curt = temps.get(j);
-                            if(!Double.isNaN(curt)){
-                                ((ArrayList<Double>) (list.get(i))).add(curt);
-                            }
-                        }
-                } catch (ParseException ex) {
-                    Logger.getLogger(BoxAndWhiskerChart.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        
-        for (int i = 0; i < 12; i++){
-            dataset.add((ArrayList<Double>) list.get(i), "Single Station", months[i]);
-        }
-                
         //Then, add the dataset for all the stations
-        List list2 = new ArrayList();
+        ArrayList<ArrayList<Double>> list2;
+        list2 = new ArrayList<>();
         for (int i = 0; i < 12; i++){
-                list2.add(new ArrayList<Double>());
-            }
-        for (Station stat: stations){
+                list2.add(new ArrayList<>());
+        }
+        
+        stations.forEach((stat) -> {
             ArrayList<Double> times2 = (ArrayList<Double>) stat.getMap().get("time");
             ArrayList<Double> temps2 = (ArrayList<Double>) stat.getMap().get("tempavg");
             
@@ -151,20 +116,25 @@ public class BoxAndWhiskerChart extends JPanel {
                 begin2 = 0;
                 end2 = temps2.size();
             }else{
-                begin2 = findApproxBeginIndex(year, temps2);
-                end2 = Math.min((begin+467),temps2.size());
+                begin2 = findApproxBeginIndex(year, times2);
+                end2 = Math.min((begin2+467),times2.size());
             }
-        
-            for (int i = 0; i < 12; i++){
-                for(int j = begin2; j<end2; j++){
+            if (begin2 != -1) {
+                for (int j = begin2; j < end2; j++) {
                     try {
                         Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times2.get(j).intValue()));
                         Calendar calendar = new GregorianCalendar();
                         calendar.setTime(temp);
-                        if((calendar.get(Calendar.YEAR) == year  &&  calendar.get(Calendar.MONTH) == i)|| year<0){   
+                        if ((calendar.get(Calendar.YEAR) == year) || year < 0) {
                             double curt = temps2.get(j);
-                            if(!Double.isNaN(curt)){
-                                ((ArrayList<Double>) (list2.get(i))).add(curt);
+                            if (!Double.isNaN(curt)) {
+                                int i = calendar.get(Calendar.MONTH);
+                                if(stat.getNum() == st.getNum()){
+                                    list1.get(i).add(curt);
+                                }
+                                else{
+                                    list2.get(i).add(curt);
+                                }
                             }
                         }
                     } catch (ParseException ex) {
@@ -172,11 +142,14 @@ public class BoxAndWhiskerChart extends JPanel {
                     }
                 }
             }
-        }
+        });
         
         for (int i = 0; i < 12; i++){
+            dataset.add((ArrayList<Double>) list1.get(i), "Current Station", months[i]);
             dataset.add((ArrayList<Double>) list2.get(i), "All Stations", months[i]);
         }
+        
+        
         return dataset;
     }
     
@@ -192,11 +165,12 @@ public class BoxAndWhiskerChart extends JPanel {
                    return Math.max(0, i-100);
                }
            } catch (ParseException ex) {
-               Logger.getLogger(PolarLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+               //System.out.println(dates.get(i));
+//Logger.getLogger(PolarLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
            }
           
        }
-       return 0;
+       return -1;
    }
 
     // ****************************************************************************
