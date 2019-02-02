@@ -72,6 +72,7 @@ public class MapViewTest extends javax.swing.JFrame {
         initComponents();
         loadData();
         stationNum = stations.get(0).getNum();
+        updateInfo(0);
         setChart1();
         jYearBox.removeAllItems();
         timeYear = false;
