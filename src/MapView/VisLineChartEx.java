@@ -84,7 +84,7 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
         this.datay = datay;
         this.year = year;
         this.title = title;
-        minVal = 0;
+        minVal = 10000;
         maxVal = 1.0;
         
         initUI();
@@ -173,6 +173,9 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         dataset.addSeries(series);
         //item = series.getDataItem(series.getItemCount() - 1);
+        if(minVal == 10000.0){
+            minVal = 0;
+        }
         return dataset;
     }
 
