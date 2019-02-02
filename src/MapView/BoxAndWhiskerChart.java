@@ -38,10 +38,13 @@ public class BoxAndWhiskerChart extends JPanel {
 
     Station st;
     ArrayList<Station> stations;
-    public BoxAndWhiskerChart(String title, Station st, ArrayList<Station> stations) {
+    int year;
+    
+    public BoxAndWhiskerChart(String title, Station st, ArrayList<Station> stations, int year) {
         
         this.st = st;
         this.stations = stations;
+        this.year = year;
         stations.remove(st);
         BoxAndWhiskerCategoryDataset dataset = createSampleDataset();
 
@@ -97,13 +100,25 @@ public class BoxAndWhiskerChart extends JPanel {
         ArrayList<Double> times = (ArrayList<Double>) st.getMap().get("time");
         ArrayList<Double> temps = (ArrayList<Double>) st.getMap().get("tempavg");
         
+        int begin;
+        int end;
+            if(year <0 ){
+                begin = 0;
+                end = temps.size();
+            }else{
+                begin = findApproxBeginIndex(year, temps);
+                end = Math.min((begin+467),temps.size());
+        }
+        
         for (int i = 0; i < 12; i++){
-            for(int j = 0; j<times.size(); j++){
+            
+            for(int j = begin; j<end; j++){
+                
                 try {
                     Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times.get(j).intValue()));
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(temp);
-                        if(calendar.get(Calendar.MONTH) == i){
+                        if((calendar.get(Calendar.YEAR) == year  &&  calendar.get(Calendar.MONTH) == i)|| year<0){
 //                            System.out.println("year:" +calendar.get(Calendar.YEAR) + " and month: " + calendar.get(Calendar.MONTH));   
                             double curt = temps.get(j);
                             if(!Double.isNaN(curt)){
@@ -128,14 +143,25 @@ public class BoxAndWhiskerChart extends JPanel {
         for (Station stat: stations){
             ArrayList<Double> times2 = (ArrayList<Double>) stat.getMap().get("time");
             ArrayList<Double> temps2 = (ArrayList<Double>) stat.getMap().get("tempavg");
+            
+            int begin2;
+            int end2;
+            
+            if(year<0){
+                begin2 = 0;
+                end2 = temps2.size();
+            }else{
+                begin2 = findApproxBeginIndex(year, temps2);
+                end2 = Math.min((begin+467),temps2.size());
+            }
         
             for (int i = 0; i < 12; i++){
-                for(int j = 0; j<times2.size(); j++){
+                for(int j = begin2; j<end2; j++){
                     try {
                         Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times2.get(j).intValue()));
                         Calendar calendar = new GregorianCalendar();
                         calendar.setTime(temp);
-                        if(calendar.get(Calendar.MONTH) == i){   
+                        if((calendar.get(Calendar.YEAR) == year  &&  calendar.get(Calendar.MONTH) == i)|| year<0){   
                             double curt = temps2.get(j);
                             if(!Double.isNaN(curt)){
                                 ((ArrayList<Double>) (list2.get(i))).add(curt);
@@ -153,6 +179,25 @@ public class BoxAndWhiskerChart extends JPanel {
         }
         return dataset;
     }
+    
+    public int findApproxBeginIndex(int year, ArrayList<Double> dates){
+       
+       for(int i = 0; i<dates.size();i=i+100){
+           Date temp;
+           try {
+               temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", dates.get(i))); 
+               Calendar calendar = new GregorianCalendar();
+               calendar.setTime(temp);
+               if(calendar.get(Calendar.YEAR) == year){
+                   return Math.max(0, i-100);
+               }
+           } catch (ParseException ex) {
+               Logger.getLogger(PolarLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+           }
+          
+       }
+       return 0;
+   }
 
     // ****************************************************************************
     // * JFREECHART DEVELOPER GUIDE                                               *

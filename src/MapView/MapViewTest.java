@@ -197,14 +197,14 @@ public final class MapViewTest extends javax.swing.JFrame {
         ArrayList<Double> ydata2 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmin")));
         ArrayList<Double> ydata3 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmax")));
         
-//        if (timeYear){
-//            b = new BoxAndWhiskerChart("BEEP", stations.get(findStationNrIndex(stationNum)), stations);
-//        } else {
-//            b = new BoxAndWhiskerChart("BOOP", stations.get(findStationNrIndex(stationNum)), stations);
-//        }
-//        if (b!= null){
-//            System.out.println("WTF");
-//        }
+        if (timeYear){
+            b = new BoxAndWhiskerChart("BEEP", stations.get(findStationNrIndex(stationNum)), stations, selectedYear);
+        } else {
+            b = new BoxAndWhiskerChart("BOOP", stations.get(findStationNrIndex(stationNum)), stations, -1);
+        }
+        if (b!= null){
+            System.out.println("WTF");
+        }
         
         String titleA = "";
         String titleB = "";
@@ -276,7 +276,7 @@ public final class MapViewTest extends javax.swing.JFrame {
         jSplitPane4.setDividerLocation(0.5);
         
         this.jSplitPane3.setTopComponent(a);
-//        this.jSplitPane3.setBottomComponent(b);
+        this.jSplitPane3.setBottomComponent(b);
         this.jSplitPane4.setTopComponent(c);
         this.jSplitPane4.setBottomComponent(d);
         //JFrame frame = new JFrame();
