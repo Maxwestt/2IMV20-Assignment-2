@@ -49,31 +49,50 @@ import org.tc33.jheatchart.HeatChart;
  *
  * @author tosku
  */
-public class MapViewTest extends javax.swing.JFrame {
-
-    ArrayList<Station> stations = new ArrayList<Station>();
-    
+public final class MapViewTest extends javax.swing.JFrame {
+    //Station vars
+    ArrayList<Station> stations;
     int stationNum;
     String stationName, opening;
     float longitude, latitude, height;
+    ArrayList<Integer> stationnumbers;
     HashMap<Integer,Station> H;
-    ArrayList<Integer> stationnumbers = new ArrayList<Integer>();
     HashMap<Integer,Point> StationButtons;
+    
+    //Heatmap vars
+    Heatmap heatmap;
+    boolean hmapInitialized;
+    ImageIcon nlmap;
+    BufferedImage nlimg; 
+    
+    //UI Vars
     boolean timeYear;
     int selectedYear;
     int selectedMonth;
-    ImageIcon nlmap;
-    BufferedImage nlimg; 
-    double[][] heatMap;
     String heatMapSelected;
     String viewASelected, viewBSelected;
     
+    
     public MapViewTest() {
+        stations = new ArrayList<>();
         H = new HashMap<>();
+        hmapInitialized = false;
+        stationnumbers = new ArrayList<>();
+        
         loadData();
         initComponents();
+        
+        //Heatmap
         setUpHeatmap();
+        heatMapSelected = "tempavg";
+        heatmap = new Heatmap(nlimg, StationButtons, stations );
+        
+        //UI
         stationNum = stations.get(0).getNum();
+        setupUI();
+    }
+    
+    public void setupUI(){
         updateInfo(0);
         setChart1();
         jYearBox.removeAllItems();
@@ -82,7 +101,6 @@ public class MapViewTest extends javax.swing.JFrame {
         selectedMonth = 1;
         nlmap = (ImageIcon)jLabel1.getIcon();
         heatMapSelected = "tempavg";
-        //BufferedImage nlmap;
         
         jMonthBox.removeAllItems();
         jMonthBox.addItem("January");
@@ -112,18 +130,12 @@ public class MapViewTest extends javax.swing.JFrame {
                 line = br.readLine();
             }
         } catch (IOException ioe){
-            ioe.printStackTrace();
         }
         
        
-        for (int snum: stationnumbers){
-            //System.out.println(stations.get(stationnumbers.indexOf(snum)));
+        stationnumbers.forEach((snum) -> {
             H.put(snum, stations.get(stationnumbers.indexOf(snum)));
-            //System.out.println(H.get(snum));
-        }
-        
-        //System.out.println(H.keySet());
-        
+        });
         String[] stringAtts = new String[8];
         stringAtts[0] = "time";
         stringAtts[1] = "winddir";
@@ -161,9 +173,7 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         } catch (IOException ioe){
             ioe.printStackTrace();
-        }
-        
-        
+        }   
     }
     
     public void setChart1(){
@@ -310,17 +320,14 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextHeight.setText(String.valueOf(height));
         opening = stat.getOpening();
         jTextOpening.setText(opening);
-        
-        jYearBox.removeAllItems();
-        
         int startyear = Integer.parseInt(opening.substring(0, 4));
         int endyear = 2018;
+        int oldselectedYear = Math.max(startyear, selectedYear);
+        jYearBox.removeAllItems();
         for (int y = startyear; y <= endyear; y++){
             jYearBox.addItem(Integer.toString(y));
         }
-        
-        selectedYear = Math.max(startyear, selectedYear);
-        
+        jYearBox.setSelectedIndex((oldselectedYear-startyear));
 //        genHeatmap();
         setChart1();
     }
@@ -370,208 +377,16 @@ public class MapViewTest extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MapViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+        hmapInitialized = true;
     }
     
     public void genHeatmap(){
-        
-        heatMap = new double[nlimg.getWidth()/10][nlimg.getHeight()/10];
-        for (int i = 0; i < heatMap.length; i++) {
-            for (int j = 0; j < heatMap[0].length; j++) {
-                heatMap[i][j] = -9999.9;
-            }
-        }
-        //setLayout(new BorderLayout());
-        //this.jSplitPane1.setBottomComponent(a);
-        for(int i: StationButtons.keySet()){
-            int xi = StationButtons.get(i).x/10;
-            int yi = heatMap[0].length-(StationButtons.get(i).y/10)-1;
-            ArrayList<Double> times = (ArrayList<Double>) stations.get(i).getMap().get("time");
-            ArrayList<Double> temps = (ArrayList<Double>) stations.get(i).getMap().get(heatMapSelected);
-            double runningavg = 0;
-            double totalm = 0;
-            for(int j = 0; j<times.size(); j++){
-                try {
-                    //System.out.println(Integer.toString(times.get(j).intValue()));
-                    Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times.get(j).intValue()));
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(temp);
-                    //if (year > 0){
-                    
-                        if(calendar.get(Calendar.MONTH) == selectedMonth-1 &&calendar.get(Calendar.YEAR) == selectedYear){
-                            //System.out.println("year:" +calendar.get(Calendar.YEAR));
-                                    
-                            //System.out.println(calendar.get(Calendar.MONTH));
-                            double curt = temps.get(j);
-                            if(!Double.isNaN(curt)){
-                                runningavg += curt;
-                                totalm++;
-                            }
-                        }
-                } catch (ParseException ex) {
-                    Logger.getLogger(VisLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(totalm>0){
-                heatMap[xi][yi] = runningavg/totalm;
-                populateNeighbours(heatMap, xi, yi, 1.0);
-                
-//                heatMap[xi+1][yi+1] = runningavg/totalm;
-//                heatMap[xi][yi+1] = runningavg/totalm;
-////                heatMap[xi-1][yi] = runningavg/totalm;
-//                heatMap[xi][yi-1] = runningavg/totalm;
-//                heatMap[xi-1][yi-1] = runningavg/totalm;
-//                heatMap[xi-1][yi+1] = runningavg/totalm;
-//                heatMap[xi+1][yi-1] = runningavg/totalm;
-                //heatMap[xi+2][yi] = runningavg/totalm;
-                //heatMap[xi+2][yi+1] = runningavg/totalm;
-                
-                //heatMap[xi][yi+2] = runningavg/totalm;
-                //heatMap[xi+2][yi] = runningavg/totalm;
-                //heatMap[xi][yi-2] = runningavg/totalm;
-//                heatMap[xi-2][yi] = runningavg/totalm;
-            }
-            //System.out.println(StationButtons.get(i));
-        }
-        double[][] interpHeatMap = heatMap.clone();
+        jLabel1.setIcon(new ImageIcon(heatmap.genHeatmap(heatMapSelected, selectedMonth, selectedYear)));
+    }
 
-        for (int i = 0; i < heatMap.length; i++) {
-            for (int j = 0; j < heatMap[0].length; j++) {
-                interpHeatMap[i][j] = interpedval(heatMap, i, j);
-            }
-        }
-        
-        DecimalFormat df = new DecimalFormat("0.00");
-        for (int i = 0; i < interpHeatMap.length; i++) {
-            for (int j = 0; j < interpHeatMap[0].length; j++) {
-                //System.out.print(df.format(interpHeatMap[i][j]) + " | ");
-            }
-            //System.out.println("");
-        }
-        
-        HeatChart hmap = new HeatChart(interpHeatMap);
-        hmap.setAxisThickness(0);
-        hmap.setShowXAxisValues(false);
-        hmap.setShowYAxisValues(false);
-        switch(heatMapSelected){
-            case "tempavg":
-                heatMapSelected= "tempavg";
-                hmap.setHighValueColour(Color.RED);
-                hmap.setLowValueColour(Color.WHITE);
-            case "tempmin":
-                hmap.setHighValueColour(Color.RED);
-                hmap.setLowValueColour(Color.WHITE);
-               break;
-            case "tempmax":
-                hmap.setHighValueColour(Color.RED);
-                hmap.setLowValueColour(Color.WHITE);
-               break;   
-            case "windsp":
-                hmap.setHighValueColour(Color.YELLOW);
-                hmap.setLowValueColour(Color.GREEN);
-               break;
-            case "pressure":
-                hmap.setHighValueColour(Color.MAGENTA);
-                hmap.setLowValueColour(Color.BLACK);
-               break;
-            case "percipation":
-                hmap.setHighValueColour(Color.BLUE);
-                hmap.setLowValueColour(Color.CYAN);
-               break;   
-        }
-        
-        
-        
-        hmap.setColourScale(1.3);
-        hmap.setChartMargin(0);
-        //hmap.setCellSize(new Dimension(nlimg.getHeight()/20, nlimg.getWidth()/20));
-        BufferedImage heatmapimg = (BufferedImage) hmap.getChartImage();
-       
-        
-        BufferedImage rotated = new BufferedImage(heatmapimg.getHeight(), heatmapimg.getWidth(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = (Graphics2D) rotated.createGraphics();
 
-        AffineTransform xform = new AffineTransform();
-        xform.translate(0.5*heatmapimg.getHeight(), 0.5*heatmapimg.getWidth());
-        xform.rotate(Math.toRadians(270));
-        xform.translate(-0.5*heatmapimg.getWidth(), -0.5*heatmapimg.getHeight());
-        g2.drawImage(heatmapimg, xform, null);
-        g2.dispose();
-        
-        
-        Image resized = rotated.getScaledInstance(nlimg.getWidth(), nlimg.getHeight(), Image.SCALE_SMOOTH);
-        //System.out.println(nlimg.getWidth());
-        //System.out.println(nlmap.getIconHeight());
-        BufferedImage dimg = new BufferedImage(nlimg.getWidth(), nlimg.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(resized, 0, 0, null);
-        g2d.dispose();
-        
-        
-        
-        BufferedImage combined = new BufferedImage(nlimg.getWidth(), nlimg.getHeight(),nlimg.getType());
-        Graphics2D g = combined.createGraphics();
-        g.setComposite(AlphaComposite.SrcOver);
-        g.drawImage(nlimg, 0,0,null);
-        float alpha = .6f;
-        g.setComposite(AlphaComposite.SrcOver.derive(alpha));
-        g.drawImage(dimg,0,0,null);
-        
-        g.dispose();
-        for(int k = 0; k<nlimg.getWidth();k++){
-            for(int l = 0; l<nlimg.getHeight();l++){
-                if (new Color(nlimg.getRGB(k,l)).equals(Color.WHITE)){
-                    combined.setRGB(k, l, new Color(135,206,250).getRGB());
-                }
-            }
-        }
-        
-        jLabel1.setIcon(new ImageIcon(combined));
-        
-        //System.out.println(((ArrayList<Double>)stations.get(findStationNrIndex(275)).getMap().get("windsp")).get(1000));
-    }
     
-    public void populateNeighbours(double[][] a, int x, int y,  double str){
-        for(int i = -2; i<3;i++){
-            for(int j = -2;j<3;j++){
-                if(!(Math.abs(i)+Math.abs(j)>3)){
-                    addP(a, x+i, y+j, a[x][y]);//*(0.7+0.3/((Math.abs(i)+Math.abs(j)+0.1))));   
-                }
-            }
-        }
-    }
     
-    private void addP(double[][] a, int x, int y, double d) {
-        if(x>=0&&x<a.length&&y>=0&&y<a[0].length){
-            if(a[x][y]<-9999){
-                a[x][y] = d;
-            }
-            else{
-                a[x][y] = (a[x][y]+d)/2;
-            }
-        }
-    }
-    
-    public double interpedval(double[][] t, int x, int y) {
-        double[][] temp2 = new double[t.length][t[0].length];
-        double total_val = 0.0;
-        double total_weight = 0.0;
-        if(t[x][y]>-9998.0){
-            return t[x][y];
-        }
-        for (int i = 0; i < t.length; i++) {
-            for (int j = 0; j < t[0].length; j++) {
-                if (!(t[i][j] < -9998)) { 
-                    if (x == i && y == j) {
-                        return t[i][j];
-                    }
-                    double d_sqr = ((i - x) * (i - x)) + ((j - y) * (j - y));
-                    total_weight = total_weight + (1.0 / (d_sqr));
-                    total_val = total_val + (t[i][j] / (d_sqr));
-                }
-            }
-        }
-        return total_val / total_weight;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1287,23 +1102,19 @@ public class MapViewTest extends javax.swing.JFrame {
                             .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(77, 77, 77)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTimeWhole)
-                                            .addComponent(jTimeYear)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jYearBox, 0, 68, Short.MAX_VALUE)
-                                            .addComponent(jMonthBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jTimeWhole)
+                                    .addComponent(jTimeYear)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jYearBox, 0, 68, Short.MAX_VALUE)
+                                    .addComponent(jMonthBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 206, Short.MAX_VALUE))))
@@ -1366,12 +1177,13 @@ public class MapViewTest extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboViewB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11)))
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
                 .addGap(13, 13, 13))
         );
 
@@ -1401,8 +1213,11 @@ public class MapViewTest extends javax.swing.JFrame {
         if (jYearBox.getSelectedItem()!=null){
             selectedYear = Integer.parseInt((String) jYearBox.getSelectedItem());
         }
-        System.out.println("Selected Year: " + selectedYear);
+        //System.out.println("Selected Year: " + selectedYear);
         setChart1();
+        if(hmapInitialized){
+            genHeatmap();
+        }
     }//GEN-LAST:event_jYearBoxActionPerformed
 
     private void jTimeYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeYearActionPerformed
