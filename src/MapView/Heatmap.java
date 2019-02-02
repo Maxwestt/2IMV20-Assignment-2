@@ -65,7 +65,8 @@ public class Heatmap {
             ArrayList<Double> temps = (ArrayList<Double>) stations.get(i).getMap().get(heatMapSelected);
             double runningavg = 0;
             double totalm = 0;
-            for (int j = 0; j<times.size(); j++) {
+            int begin = findApproxBeginIndex(selectedYear, times);
+            for(int j = begin; j < Math.min((begin+467), times.size()); j++){
                 try {
                     //System.out.println(Integer.toString(times.get(j).intValue()));
                     Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times.get(j).intValue()));
@@ -225,4 +226,21 @@ public class Heatmap {
         
         return combined;
     }
+
+   private int findApproxBeginIndex(int year, ArrayList<Double> dates){   
+       for(int i = 0; i<dates.size();i=i+100){
+           Date temp;
+           try {
+               temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", dates.get(i))); 
+               Calendar calendar = new GregorianCalendar();
+               calendar.setTime(temp);
+               if(calendar.get(Calendar.YEAR) == year){
+                   return Math.max(0, i-100);
+               }
+           } catch (ParseException ex) {
+               Logger.getLogger(PolarLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+       return 0;
+   }
 }

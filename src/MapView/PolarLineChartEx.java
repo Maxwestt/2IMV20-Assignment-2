@@ -29,31 +29,40 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 /**
- * @author imssbora
+ * @author mwest
  *
  */
-public class PolarLineChartExample extends JPanel {
+public final class PolarLineChartEx extends JPanel {
 
    private static final long serialVersionUID = 1L;
    private static ArrayList<WindObj> winds;
 
    ArrayList<Double> dates, direction, speed;
    int year;
-    public PolarLineChartExample(ArrayList<Double> dates, ArrayList<Double> direction, ArrayList<Double> speed, int year) {
+   public PolarLineChartEx(ArrayList<Double> dates, ArrayList<Double> direction, ArrayList<Double> speed, int year, int selectedMonth) {
        
         this.direction = direction;
         this.speed = speed;
         this.dates = dates;
         this.year = year;
         
-        winds = new ArrayList<WindObj>();
-        
-        for(int i = 0; i < dates.size(); i++){
+        winds = new ArrayList<>();
+        int begin;
+        int end;
+        if(year <0 ){
+            begin = 0;
+            end = dates.size();
+        }
+        else{
+            begin = findApproxBeginIndex(year, dates);
+            end = Math.min((begin+467),dates.size());
+        }
+        for(int i = begin; i < end; i++){
             try {
                     Date temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", dates.get(i)));
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(temp);
-                        if(calendar.get(Calendar.YEAR) == year || year<0){
+                        if((calendar.get(Calendar.YEAR) == year  &&calendar.get(Calendar.MONTH) == selectedMonth-1)|| year<0){
                             winds.add(new WindObj(direction.get(i), speed.get(i)));
                         }
             } catch (ParseException ex) {
@@ -67,12 +76,7 @@ public class PolarLineChartExample extends JPanel {
                 return(o1.getDirection().compareTo(o1.getDirection()));
             }
         });
-        double maxWind = 0;
-        for (WindObj wo: winds){
-            if (wo.getSpeed() > maxWind){
-                maxWind = wo.getSpeed();
-            }
-        }
+        
         //System.out.println(maxWind);
       
       // Create dataset
@@ -107,6 +111,26 @@ public class PolarLineChartExample extends JPanel {
         
    }
 
+   public int findApproxBeginIndex(int year, ArrayList<Double> dates){
+       
+       for(int i = 0; i<dates.size();i=i+100){
+           Date temp;
+           try {
+               temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", dates.get(i))); 
+               Calendar calendar = new GregorianCalendar();
+               calendar.setTime(temp);
+               if(calendar.get(Calendar.YEAR) == year){
+                   return Math.max(0, i-100);
+               }
+           } catch (ParseException ex) {
+               Logger.getLogger(PolarLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+           }
+          
+       }
+       return 0;
+   }
+   
+   
    private XYDataset getXYDataset(ArrayList<WindObj> winds) {
      
       XYSeriesCollection dataset = new XYSeriesCollection();

@@ -136,7 +136,18 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 
         TimeSeries series = new TimeSeries(title);
         //System.out.println(datax.size());
-        for(int i = 0; i < datax.size(); i++){
+        int begin;
+        int end;
+        if(year <0 ){
+            begin = 0;
+            end = datax.size();
+        }
+        else{
+            begin = findApproxBeginIndex(year, datax);
+            end = Math.min((begin+467),datax.size());
+        }
+        
+        for(int i = begin; i < end ; i++){
             
                 try {
                     Date temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", datax.get(i)));
@@ -234,10 +245,7 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
                         new Font("SansSerif", java.awt.Font.PLAIN, 12)
                 )
         );
-
-       
         return chart;
-
     }
 
     
@@ -258,20 +266,8 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
         
         this.xCrosshair.setValue(x);
         this.yCrosshair.setValue(y);
-//
-//        ChartEntity ce = cme.getEntity();
-//
-//        double xs = item.getPeriod().getFirstMillisecond();
-//        double ys = item.getValue().doubleValue();
-        //cme.getEntity().setToolTipText("sank");
-        //double x = cme.g
-        //XYPointerAnnotation a = new XYPointerAnnotation("Bam!", xs, ys, 5 * Math.PI / 8);
-        //XYPlot plot = (XYPlot) chart.getPlot();
-        //plot.addAnnotation(a);
 
-        //if (ce instanceof XYAnnotationEntity) {
-        // handle the click
-        //}
+        
     }
 
     @Override
@@ -281,13 +277,22 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 
         
     
-//    public static void main(String[] args) {
-//
-//        SwingUtilities.invokeLater(() -> {
-//            VisLineChartEx ex = new VisLineChartEx());
-//            ex.setVisible(true);
-//        });
-//    }
+   private int findApproxBeginIndex(int year, ArrayList<Double> dates){   
+       for(int i = 0; i<dates.size();i=i+100){
+           Date temp;
+           try {
+               temp = new SimpleDateFormat("yyyyMMdd").parse(String.format("%.0f", dates.get(i))); 
+               Calendar calendar = new GregorianCalendar();
+               calendar.setTime(temp);
+               if(calendar.get(Calendar.YEAR) == year){
+                   return Math.max(0, i-100);
+               }
+           } catch (ParseException ex) {
+               Logger.getLogger(PolarLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+       return 0;
+   }
 
 }
 

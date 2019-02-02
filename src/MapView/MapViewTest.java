@@ -184,11 +184,11 @@ public final class MapViewTest extends javax.swing.JFrame {
         ArrayList<Double> ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
 
         
-        PolarLineChartExample a; 
+        PolarLineChartEx a; 
         if (timeYear){
-            a = new PolarLineChartExample(xdata, dirData1, speedData1, selectedYear);
+            a = new PolarLineChartEx(xdata, dirData1, speedData1, selectedYear, selectedMonth);
         } else {
-            a = new PolarLineChartExample(xdata, dirData1, speedData1, -1);
+            a = new PolarLineChartEx(xdata, dirData1, speedData1, -1, selectedMonth);
         }
         
         BoxAndWhiskerChart b;
@@ -1408,6 +1408,7 @@ public final class MapViewTest extends javax.swing.JFrame {
     private void jMonthBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMonthBoxActionPerformed
         selectedMonth = jMonthBox.getSelectedIndex() + 1;
         genHeatmap();
+        setChart1();
     }//GEN-LAST:event_jMonthBoxActionPerformed
 
     private void jComboViewAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboViewAActionPerformed
