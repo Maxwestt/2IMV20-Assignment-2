@@ -24,6 +24,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -124,7 +126,10 @@ public final class MapViewTest extends javax.swing.JFrame {
     
     public void loadData(){
         try{
-            BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/Stations.csv"));
+           InputStream in =  this.getClass().getClassLoader()
+                                .getResourceAsStream("MapView/data/Stations.csv");
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            //BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/Stations.csv"));
             String line = br.readLine();
             
             while (line != null){
@@ -152,7 +157,10 @@ public final class MapViewTest extends javax.swing.JFrame {
         stringAtts[7] = "pressure";
         
         try{
-            BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/KNMI_reduced.txt"));
+            InputStream in =  this.getClass().getClassLoader()
+                                .getResourceAsStream("MapView/data/KNMI_reduced.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            //BufferedReader br = new BufferedReader(new FileReader("src/MapView/data/KNMI_reduced.txt"));
             String line;
             
             while ( (line = br.readLine()) != null ){
@@ -381,7 +389,10 @@ public final class MapViewTest extends javax.swing.JFrame {
         StationButtons.put(findStationNrIndex(391), jStation391.getLocation());
         
         try {
-            nlimg = ImageIO.read(new File("src/MapView/images/Map Netherlands v2.0.png"));
+            InputStream in =  MapViewTest.class.getResourceAsStream("/MapView/Images/Mapnl.png");
+            nlimg =  ImageIO.read(in);
+            //
+            //nlimg = ImageIO.read(new File("src/MapView/images/Map Netherlands v2.0.png"));
         } catch (IOException ex) {
             Logger.getLogger(MapViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -760,7 +771,7 @@ public final class MapViewTest extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Map Netherlands v2.0.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MapView/Images/Mapnl.png"))); // NOI18N
 
         jLayeredPane1.setLayer(jStation209, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation215, javax.swing.JLayeredPane.DEFAULT_LAYER);

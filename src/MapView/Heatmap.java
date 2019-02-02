@@ -37,6 +37,7 @@ public class Heatmap {
     ArrayList<Station> stations;
     Calendar calendar;
     
+    
     public Heatmap(BufferedImage img, HashMap<Integer,Point> sb, ArrayList<Station> s){
         this.nlimg = img;
         this.StationButtons = sb;
