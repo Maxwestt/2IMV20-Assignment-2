@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.paint.Color;
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartPanel;
@@ -39,12 +40,14 @@ public class BoxAndWhiskerChart extends JPanel {
     Station st;
     ArrayList<Station> stations;
     int year;
+    String location;
     
-    public BoxAndWhiskerChart(String title, Station st, ArrayList<Station> stations, int year) {
+    public BoxAndWhiskerChart(String title, String location, Station st, ArrayList<Station> stations, int year) {
         
         this.st = st;
         this.stations = stations;
         this.year = year;
+        this.location = location;
         //stations.remove(st);
         BoxAndWhiskerCategoryDataset dataset = createSampleDataset();
 
@@ -52,12 +55,14 @@ public class BoxAndWhiskerChart extends JPanel {
         NumberAxis yAxis = new NumberAxis("Value");
         yAxis.setAutoRangeIncludesZero(false);
         BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
-        renderer.setFillBox(false);
-        //renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+        renderer.setFillBox(true);
+        renderer.setToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+        renderer.setItemMargin(0.01);
+        
         CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
-
+        
         JFreeChart chart = new JFreeChart(
-            "Box-and-Whisker Demo",
+            title,
             new Font("SansSerif", Font.BOLD, 14),
             plot,
             true
@@ -65,6 +70,8 @@ public class BoxAndWhiskerChart extends JPanel {
         ChartPanel panel = new ChartPanel(chart);
         this.setLayout(new BorderLayout());
         this.add(panel, BorderLayout.NORTH);
+        
+        
 
     }
 
@@ -107,7 +114,7 @@ public class BoxAndWhiskerChart extends JPanel {
         
         stations.forEach((stat) -> {
             ArrayList<Double> times2 = (ArrayList<Double>) stat.getMap().get("time");
-            ArrayList<Double> temps2 = (ArrayList<Double>) stat.getMap().get("tempavg");
+            ArrayList<Double> temps2 = (ArrayList<Double>) stat.getMap().get(location);
             
             int begin2;
             int end2;

@@ -190,6 +190,7 @@ public final class MapViewTest extends javax.swing.JFrame {
         ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));
         ArrayList<Double> ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
         ArrayList<Double> ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+        String ydataCLoc = "tempavg";
 
         
         PolarLineChartEx a; 
@@ -200,18 +201,39 @@ public final class MapViewTest extends javax.swing.JFrame {
         }
         
         BoxAndWhiskerChart b;
+        String titleC = "Average Temperature";
         
-        ArrayList<Double> ydata1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
-        ArrayList<Double> ydata2 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmin")));
-        ArrayList<Double> ydata3 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmax")));
+        switch(jComboViewC.getSelectedIndex()){
+            case 0:
+                titleC= "Average Temperature";
+                ydataCLoc = "tempavg";
+                break;
+            case 1:
+                titleC= "Minimum Temperature";
+                ydataCLoc = "tempmin";
+               break;
+            case 2:
+                titleC= "Maximum Temperature";
+                ydataCLoc = "tempmax";
+               break;   
+            case 3:
+                titleC= "Wind Speed";
+                ydataCLoc = "windsp";
+               break;
+            case 4:
+                titleC= "Pressure";
+                ydataCLoc = "pressure";
+               break;
+            case 5:
+                titleC= "Percipation";
+                ydataCLoc = "Percipation";
+               break;   
+        }
         
         if (timeYear){
-            b = new BoxAndWhiskerChart("BEEP", stations.get(findStationNrIndex(stationNum)), stations, selectedYear);
+            b = new BoxAndWhiskerChart(titleC, ydataCLoc, stations.get(findStationNrIndex(stationNum)), stations, selectedYear);
         } else {
-            b = new BoxAndWhiskerChart("BOOP", stations.get(findStationNrIndex(stationNum)), stations, -1);
-        }
-        if (b!= null){
-            System.out.println("WTF");
+            b = new BoxAndWhiskerChart(titleC, ydataCLoc, stations.get(findStationNrIndex(stationNum)), stations, -1);
         }
         
         String titleA = "";
@@ -464,6 +486,8 @@ public final class MapViewTest extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jComboViewB = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jComboViewC = new javax.swing.JComboBox<>();
         jSplitPane2 = new javax.swing.JSplitPane();
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
@@ -1070,6 +1094,15 @@ public final class MapViewTest extends javax.swing.JFrame {
 
         jLabel11.setText("View B");
 
+        jLabel12.setText("View C");
+
+        jComboViewC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Average Temperature", "Minimum Temperature", "Maximum Temperature", "Wind Speed", "Air Pressure", "Percipation" }));
+        jComboViewC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboViewCActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1122,20 +1155,23 @@ public final class MapViewTest extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jYearBox, 0, 68, Short.MAX_VALUE)
                                     .addComponent(jMonthBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(269, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 206, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboViewB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 206, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboViewB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboViewC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1185,13 +1221,15 @@ public final class MapViewTest extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboViewB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10)))
+                        .addComponent(jComboViewC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboViewB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))))
                 .addGap(13, 13, 13))
         );
 
@@ -1427,6 +1465,10 @@ public final class MapViewTest extends javax.swing.JFrame {
         setChart1();
     }//GEN-LAST:event_jComboViewBActionPerformed
 
+    private void jComboViewCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboViewCActionPerformed
+        setChart1();
+    }//GEN-LAST:event_jComboViewCActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1470,9 +1512,11 @@ public final class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboViewA;
     private javax.swing.JComboBox<String> jComboViewB;
+    private javax.swing.JComboBox<String> jComboViewC;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
