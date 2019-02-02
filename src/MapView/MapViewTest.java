@@ -181,16 +181,19 @@ public class MapViewTest extends javax.swing.JFrame {
             a = new PolarLineChartExample(xdata, dirData1, speedData1, -1);
         }
         
-        VisLineChartMultiple b;
+        BoxAndWhiskerChart b;
         
         ArrayList<Double> ydata1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
         ArrayList<Double> ydata2 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmin")));
         ArrayList<Double> ydata3 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmax")));
         
         if (timeYear){
-            b = new VisLineChartMultiple(xdata, ydata1, ydata2, ydata3, selectedYear);
+            b = new BoxAndWhiskerChart("BEEP", stations.get(findStationNrIndex(stationNum)), stations);
         } else {
-            b = new VisLineChartMultiple(xdata, ydata1, ydata2, ydata3, -1);
+            b = new BoxAndWhiskerChart("BOOP", stations.get(findStationNrIndex(stationNum)), stations);
+        }
+        if (b!= null){
+            System.out.println("WTF");
         }
         
         String titleA = "";
@@ -247,8 +250,6 @@ public class MapViewTest extends javax.swing.JFrame {
                 ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("percipation")));
                break;   
         }
-        //System.out.println(titleA);
-        //System.out.println(titleB);
         
         VisLineChartEx c;
         VisLineChartEx d;
@@ -294,7 +295,6 @@ public class MapViewTest extends javax.swing.JFrame {
         
         return new Station(num, name, longi, lat, height, opening);
     }
-    
     
     public void updateInfo(int i){
         Station stat = stations.get(i);
@@ -371,10 +371,6 @@ public class MapViewTest extends javax.swing.JFrame {
             Logger.getLogger(MapViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-
-
     
     public void genHeatmap(){
         
