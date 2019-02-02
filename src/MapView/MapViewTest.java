@@ -49,29 +49,51 @@ import org.tc33.jheatchart.HeatChart;
  *
  * @author tosku
  */
-public class MapViewTest extends javax.swing.JFrame {
-
-    ArrayList<Station> stations = new ArrayList<Station>();
-    
+public final class MapViewTest extends javax.swing.JFrame {
+    //Station vars
+    ArrayList<Station> stations;
     int stationNum;
     String stationName, opening;
     float longitude, latitude, height;
+    ArrayList<Integer> stationnumbers;
     HashMap<Integer,Station> H;
-    ArrayList<Integer> stationnumbers = new ArrayList<Integer>();
     HashMap<Integer,Point> StationButtons;
+    
+    //Heatmap vars
+    Heatmap heatmap;
+    boolean hmapInitialized;
+    ImageIcon nlmap;
+    BufferedImage nlimg; 
+    
+    //UI Vars
     boolean timeYear;
     int selectedYear;
     int selectedMonth;
-    ImageIcon nlmap;
-    BufferedImage nlimg; 
-    double[][] heatMap;
     String heatMapSelected;
+    String viewASelected, viewBSelected;
+    
     
     public MapViewTest() {
+        stations = new ArrayList<>();
         H = new HashMap<>();
-        initComponents();
+        hmapInitialized = false;
+        stationnumbers = new ArrayList<>();
+        
         loadData();
+        initComponents();
+        
+        //Heatmap
+        setUpHeatmap();
+        heatMapSelected = "tempavg";
+        heatmap = new Heatmap(nlimg, StationButtons, stations );
+        
+        //UI
         stationNum = stations.get(0).getNum();
+        setupUI();
+    }
+    
+    public void setupUI(){
+        updateInfo(0);
         setChart1();
         jYearBox.removeAllItems();
         timeYear = false;
@@ -79,7 +101,20 @@ public class MapViewTest extends javax.swing.JFrame {
         selectedMonth = 1;
         nlmap = (ImageIcon)jLabel1.getIcon();
         heatMapSelected = "tempavg";
-        //BufferedImage nlmap;
+        
+        jMonthBox.removeAllItems();
+        jMonthBox.addItem("January");
+        jMonthBox.addItem("February");
+        jMonthBox.addItem("March");
+        jMonthBox.addItem("April");
+        jMonthBox.addItem("May");
+        jMonthBox.addItem("June");
+        jMonthBox.addItem("July");
+        jMonthBox.addItem("August");
+        jMonthBox.addItem("September");
+        jMonthBox.addItem("October");
+        jMonthBox.addItem("November");
+        jMonthBox.addItem("December");
     }
     
     public void loadData(){
@@ -95,18 +130,12 @@ public class MapViewTest extends javax.swing.JFrame {
                 line = br.readLine();
             }
         } catch (IOException ioe){
-            ioe.printStackTrace();
         }
         
        
-        for (int snum: stationnumbers){
-            //System.out.println(stations.get(stationnumbers.indexOf(snum)));
+        stationnumbers.forEach((snum) -> {
             H.put(snum, stations.get(stationnumbers.indexOf(snum)));
-            //System.out.println(H.get(snum));
-        }
-        
-        //System.out.println(H.keySet());
-        
+        });
         String[] stringAtts = new String[8];
         stringAtts[0] = "time";
         stringAtts[1] = "winddir";
@@ -144,18 +173,16 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         } catch (IOException ioe){
             ioe.printStackTrace();
-        }
-        
-        setUpHeatmap();
+        }   
     }
     
     public void setChart1(){
-        
-        VisLineChart b = new VisLineChart("", "");
         ArrayList<Double> dirData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("winddir")));
         ArrayList<Double> speedData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("windsp")));
         ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));
-        ArrayList<Double> ydata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+        ArrayList<Double> ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+        ArrayList<Double> ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+
         
         PolarLineChartExample a; 
         if (timeYear){
@@ -164,34 +191,93 @@ public class MapViewTest extends javax.swing.JFrame {
             a = new PolarLineChartExample(xdata, dirData1, speedData1, -1);
         }
         
+        VisLineChartMultiple b;
         
-        VisLineChartEx c;
-        if (timeYear){
-            c = new VisLineChartEx(xdata, ydata, selectedYear);
-        } else {
-            c = new VisLineChartEx(xdata, ydata, -1);
-        }
-        
-        VisLineChartMultiple d;
-        
-        ArrayList<Double> xdata1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));
         ArrayList<Double> ydata1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
         ArrayList<Double> ydata2 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmin")));
         ArrayList<Double> ydata3 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmax")));
         
-        
         if (timeYear){
-            d = new VisLineChartMultiple(xdata1, ydata1, ydata2, ydata3, selectedYear);
+            b = new VisLineChartMultiple(xdata, ydata1, ydata2, ydata3, selectedYear);
         } else {
-            d = new VisLineChartMultiple(xdata1, ydata1, ydata2, ydata3, -1);
+            b = new VisLineChartMultiple(xdata, ydata1, ydata2, ydata3, -1);
         }
         
+        String titleA = "";
+        String titleB = "";
+        switch(jComboViewA.getSelectedIndex()){
+            case 0:
+                titleA= "Average Temperature";
+                ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+                break;
+            case 1:
+                titleA= "Minimum Temperature";
+                ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmin")));
+               break;
+            case 2:
+                titleA= "Maximum Temperature";
+                ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmax")));
+               break;   
+            case 3:
+                titleA= "Wind Speed";
+                ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("windsp")));
+               break;
+            case 4:
+                titleA= "Pressure";
+                ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("pressure")));
+               break;
+            case 5:
+                titleA= "Percipation";
+                ydataA = ((ArrayList<Double>) (H.get(stationNum).getMap().get("percipation")));
+               break;   
+        }
+        switch(jComboViewB.getSelectedIndex()){
+            case 0:
+                titleB= "Average Temperature";
+                ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
+                break;
+            case 1:
+                titleB= "Minimum Temperature";
+                ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmin")));
+               break;
+            case 2:
+                titleB= "Maximum Temperature";
+                ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempmax")));
+               break;   
+            case 3:
+                titleB= "Wind Speed";
+                ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("windsp")));
+               break;
+            case 4:
+                titleB= "Pressure";
+                ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("pressure")));
+               break;
+            case 5:
+                titleB= "Percipation";
+                ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("percipation")));
+               break;   
+        }
+        //System.out.println(titleA);
+        //System.out.println(titleB);
         
+        VisLineChartEx c;
+        VisLineChartEx d;
+        if (timeYear){
+            c = new VisLineChartEx(titleA, xdata, ydataA, selectedYear);
+            d = new VisLineChartEx(titleB, xdata, ydataB, selectedYear);
+        } else {
+            c = new VisLineChartEx(titleA, xdata, ydataA, -1);
+            d = new VisLineChartEx(titleB, xdata, ydataB, -1);
+        }
         
-        this.jSplitPane3.setTopComponent(b);
-        this.jSplitPane4.setTopComponent(a);
-        this.jSplitPane4.setBottomComponent(c);
-        this.jSplitPane3.setBottomComponent(d);
+        jSplitPane2.setDividerLocation(0.5);
+        jSplitPane3.setDividerLocation(0.33);
+        jSplitPane4.setDividerLocation(0.5);
+        
+        this.jSplitPane3.setTopComponent(a);
+        this.jSplitPane3.setBottomComponent(b);
+        this.jSplitPane4.setTopComponent(c);
+        this.jSplitPane4.setBottomComponent(d);
         //JFrame frame = new JFrame();
         //this.add(a);
         //this.pack();
@@ -234,15 +320,15 @@ public class MapViewTest extends javax.swing.JFrame {
         jTextHeight.setText(String.valueOf(height));
         opening = stat.getOpening();
         jTextOpening.setText(opening);
-        
-        jYearBox.removeAllItems();
-        
         int startyear = Integer.parseInt(opening.substring(0, 4));
         int endyear = 2018;
+        int oldselectedYear = Math.max(startyear, selectedYear);
+        jYearBox.removeAllItems();
         for (int y = startyear; y <= endyear; y++){
             jYearBox.addItem(Integer.toString(y));
         }
-        
+        jYearBox.setSelectedIndex((oldselectedYear-startyear));
+//        genHeatmap();
         setChart1();
     }
     
@@ -265,7 +351,7 @@ public class MapViewTest extends javax.swing.JFrame {
         StationButtons.put(findStationNrIndex(251), jStation251.getLocation());
         StationButtons.put(findStationNrIndex(259), jStation259.getLocation());
         StationButtons.put(findStationNrIndex(270), jStation270.getLocation());
-        StationButtons.put(findStationNrIndex(274), jStation274.getLocation());
+        StationButtons.put(findStationNrIndex(273), jStation273.getLocation());
         StationButtons.put(findStationNrIndex(275), jStation275.getLocation());
         StationButtons.put(findStationNrIndex(278), jStation278.getLocation());
         StationButtons.put(findStationNrIndex(280), jStation280.getLocation());
@@ -291,196 +377,16 @@ public class MapViewTest extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MapViewTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
+        hmapInitialized = true;
     }
-    
-    
-
-
     
     public void genHeatmap(){
-        
-        heatMap = new double[nlimg.getWidth()/10][nlimg.getHeight()/10];
-        for (int i = 0; i < heatMap.length; i++) {
-            for (int j = 0; j < heatMap[0].length; j++) {
-                heatMap[i][j] = -9999.9;
-            }
-        }
-        //setLayout(new BorderLayout());
-        //this.jSplitPane1.setBottomComponent(a);
-        for(int i: StationButtons.keySet()){
-            int xi = StationButtons.get(i).x/10;
-            int yi = heatMap[0].length-(StationButtons.get(i).y/10)-1;
-            ArrayList<Double> times = (ArrayList<Double>) stations.get(i).getMap().get("time");
-            ArrayList<Double> temps = (ArrayList<Double>) stations.get(i).getMap().get(heatMapSelected);
-            double runningavg = 0;
-            double totalm = 0;
-            for(int j = 0; j<times.size(); j++){
-                try {
-                    //System.out.println(Integer.toString(times.get(j).intValue()));
-                    Date temp = new SimpleDateFormat("yyyyMMdd").parse(Integer.toString(times.get(j).intValue()));
-                    Calendar calendar = new GregorianCalendar();
-                    calendar.setTime(temp);
-                    //if (year > 0){
-                    
-                        if(calendar.get(Calendar.MONTH) == selectedMonth-1 &&calendar.get(Calendar.YEAR) == selectedYear){
-                            //System.out.println("year:" +calendar.get(Calendar.YEAR));
-                                    
-                            //System.out.println(calendar.get(Calendar.MONTH));
-                            double curt = temps.get(j);
-                            if(!Double.isNaN(curt)){
-                                runningavg += curt;
-                                totalm++;
-                            }
-                        }
-                } catch (ParseException ex) {
-                    Logger.getLogger(VisLineChartEx.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(totalm>0){
-                heatMap[xi][yi] = runningavg/totalm;
-                populateNeighbours(heatMap, xi, yi, 1.0);
-                
-//                heatMap[xi+1][yi+1] = runningavg/totalm;
-//                heatMap[xi][yi+1] = runningavg/totalm;
-////                heatMap[xi-1][yi] = runningavg/totalm;
-//                heatMap[xi][yi-1] = runningavg/totalm;
-//                heatMap[xi-1][yi-1] = runningavg/totalm;
-//                heatMap[xi-1][yi+1] = runningavg/totalm;
-//                heatMap[xi+1][yi-1] = runningavg/totalm;
-                //heatMap[xi+2][yi] = runningavg/totalm;
-                //heatMap[xi+2][yi+1] = runningavg/totalm;
-                
-                //heatMap[xi][yi+2] = runningavg/totalm;
-                //heatMap[xi+2][yi] = runningavg/totalm;
-                //heatMap[xi][yi-2] = runningavg/totalm;
-//                heatMap[xi-2][yi] = runningavg/totalm;
-            }
-            //System.out.println(StationButtons.get(i));
-        }
-        double[][] interpHeatMap = heatMap.clone();
-
-        for (int i = 0; i < heatMap.length; i++) {
-            for (int j = 0; j < heatMap[0].length; j++) {
-                interpHeatMap[i][j] = interpedval(heatMap, i, j);
-            }
-        }
-        
-        DecimalFormat df = new DecimalFormat("0.00");
-//        for (int i = 0; i < interpHeatMap.length; i++) {
-//            for (int j = 0; j < interpHeatMap[0].length; j++) {
-//                System.out.print(df.format(interpHeatMap[i][j]) + " | ");
-//            }
-//            System.out.println("");
-//        }
-//        
-        HeatChart hmap = new HeatChart(interpHeatMap);
-        hmap.setAxisThickness(0);
-        hmap.setShowXAxisValues(false);
-        hmap.setShowYAxisValues(false);
-        if(heatMapSelected.equals("tempavg")){
-            hmap.setHighValueColour(Color.RED);
-            hmap.setLowValueColour(Color.WHITE);
-
-        }
-        if(heatMapSelected.equals("windsp")){
-            hmap.setHighValueColour(Color.YELLOW);
-            hmap.setLowValueColour(Color.GREEN);
-
-        }
-        
-        hmap.setColourScale(1.3);
-        hmap.setChartMargin(0);
-        //hmap.setCellSize(new Dimension(nlimg.getHeight()/20, nlimg.getWidth()/20));
-        BufferedImage heatmapimg = (BufferedImage) hmap.getChartImage();
-       
-        
-        BufferedImage rotated = new BufferedImage(heatmapimg.getHeight(), heatmapimg.getWidth(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = (Graphics2D) rotated.createGraphics();
-
-        AffineTransform xform = new AffineTransform();
-        xform.translate(0.5*heatmapimg.getHeight(), 0.5*heatmapimg.getWidth());
-        xform.rotate(Math.toRadians(270));
-        xform.translate(-0.5*heatmapimg.getWidth(), -0.5*heatmapimg.getHeight());
-        g2.drawImage(heatmapimg, xform, null);
-        g2.dispose();
-        
-        
-        Image resized = rotated.getScaledInstance(nlimg.getWidth(), nlimg.getHeight(), Image.SCALE_SMOOTH);
-        //System.out.println(nlimg.getWidth());
-        //System.out.println(nlmap.getIconHeight());
-        BufferedImage dimg = new BufferedImage(nlimg.getWidth(), nlimg.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(resized, 0, 0, null);
-        g2d.dispose();
-        
-        
-        
-        BufferedImage combined = new BufferedImage(nlimg.getWidth(), nlimg.getHeight(),nlimg.getType());
-        Graphics2D g = combined.createGraphics();
-        g.setComposite(AlphaComposite.SrcOver);
-        g.drawImage(nlimg, 0,0,null);
-        float alpha = .6f;
-        g.setComposite(AlphaComposite.SrcOver.derive(alpha));
-        g.drawImage(dimg,0,0,null);
-        
-        g.dispose();
-        for(int k = 0; k<nlimg.getWidth();k++){
-            for(int l = 0; l<nlimg.getHeight();l++){
-                if (new Color(nlimg.getRGB(k,l)).equals(Color.WHITE)){
-                    combined.setRGB(k, l, new Color(135,206,250).getRGB());
-                }
-            }
-        }
-        
-        jLabel1.setIcon(new ImageIcon(combined));
-        
-        //System.out.println(((ArrayList<Double>)stations.get(findStationNrIndex(275)).getMap().get("windsp")).get(1000));
+        jLabel1.setIcon(new ImageIcon(heatmap.genHeatmap(heatMapSelected, selectedMonth, selectedYear)));
     }
+
+
     
-    public void populateNeighbours(double[][] a, int x, int y,  double str){
-        for(int i = -2; i<3;i++){
-            for(int j = -2;j<3;j++){
-                if(!(Math.abs(i)+Math.abs(j)>3)){
-                    addP(a, x+i, y+j, a[x][y]);//*(0.7+0.3/((Math.abs(i)+Math.abs(j)+0.1))));   
-                }
-            }
-        }
-    }
     
-    private void addP(double[][] a, int x, int y, double d) {
-        if(x>=0&&x<a.length&&y>=0&&y<a[0].length){
-            if(a[x][y]<-9999){
-                a[x][y] = d;
-            }
-            else{
-                a[x][y] = (a[x][y]+d)/2;
-            }
-        }
-    }
-    
-    public double interpedval(double[][] t, int x, int y) {
-        double[][] temp2 = new double[t.length][t[0].length];
-        double total_val = 0.0;
-        double total_weight = 0.0;
-        if(t[x][y]>-9998.0){
-            return t[x][y];
-        }
-        for (int i = 0; i < t.length; i++) {
-            for (int j = 0; j < t[0].length; j++) {
-                if (!(t[i][j] < -9998)) { 
-                    if (x == i && y == j) {
-                        return t[i][j];
-                    }
-                    double d_sqr = ((i - x) * (i - x)) + ((j - y) * (j - y));
-                    total_weight = total_weight + (1.0 / (d_sqr));
-                    total_val = total_val + (t[i][j] / (d_sqr));
-                }
-            }
-        }
-        return total_val / total_weight;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -507,7 +413,7 @@ public class MapViewTest extends javax.swing.JFrame {
         jStation270 = new javax.swing.JRadioButton();
         jStation278 = new javax.swing.JRadioButton();
         jStation275 = new javax.swing.JRadioButton();
-        jStation274 = new javax.swing.JRadioButton();
+        jStation273 = new javax.swing.JRadioButton();
         jStation280 = new javax.swing.JRadioButton();
         jStation283 = new javax.swing.JRadioButton();
         jStation286 = new javax.swing.JRadioButton();
@@ -544,7 +450,12 @@ public class MapViewTest extends javax.swing.JFrame {
         jTimeWhole = new javax.swing.JRadioButton();
         jTimeYear = new javax.swing.JRadioButton();
         jYearBox = new javax.swing.JComboBox<>();
-        jSlider2 = new javax.swing.JSlider();
+        jMonthBox = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jComboViewA = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jComboViewB = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
         jSplitPane2 = new javax.swing.JSplitPane();
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
@@ -557,6 +468,7 @@ public class MapViewTest extends javax.swing.JFrame {
 
         jStation209.setBackground(new java.awt.Color(0, 0, 0));
         LocationChoice.add(jStation209);
+        jStation209.setSelected(true);
         jStation209.setToolTipText("IJmond");
         jStation209.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -654,12 +566,12 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
-        jStation274.setBackground(new java.awt.Color(0, 0, 0));
-        LocationChoice.add(jStation274);
-        jStation274.setToolTipText("Marknesse");
-        jStation274.addActionListener(new java.awt.event.ActionListener() {
+        jStation273.setBackground(new java.awt.Color(0, 0, 0));
+        LocationChoice.add(jStation273);
+        jStation273.setToolTipText("Marknesse");
+        jStation273.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jStation274ActionPerformed(evt);
+                jStation273ActionPerformed(evt);
             }
         });
 
@@ -833,7 +745,7 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Temperature", "Wind Speed" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Average Temperature", "Minimum Temperature", "Maximum Temperature", "Wind Speed", "Air Pressure", "Percipation" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -852,7 +764,7 @@ public class MapViewTest extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jStation270, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation278, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation275, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jStation274, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jStation273, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation280, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation283, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jStation286, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -973,7 +885,7 @@ public class MapViewTest extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(380, 380, 380)
-                    .addComponent(jStation274)
+                    .addComponent(jStation273)
                     .addContainerGap(206, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -1066,7 +978,7 @@ public class MapViewTest extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(214, 214, 214)
-                    .addComponent(jStation274)
+                    .addComponent(jStation273)
                     .addContainerGap(465, Short.MAX_VALUE)))
         );
 
@@ -1122,31 +1034,39 @@ public class MapViewTest extends javax.swing.JFrame {
             }
         });
 
-        jSlider2.setMajorTickSpacing(1);
-        jSlider2.setMaximum(12);
-        jSlider2.setMinimum(1);
-        jSlider2.setOrientation(javax.swing.JSlider.VERTICAL);
-        jSlider2.setPaintLabels(true);
-        jSlider2.setPaintTicks(true);
-        jSlider2.setSnapToTicks(true);
-        jSlider2.setToolTipText("");
-        jSlider2.setValue(1);
-        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider2StateChanged(evt);
+        jMonthBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jMonthBox.setEnabled(false);
+        jMonthBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMonthBoxActionPerformed(evt);
             }
         });
+
+        jLabel9.setText("Month Selection");
+
+        jComboViewA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Average Temperature", "Minimum Temperature", "Maximum Temperature", "Wind Speed", "Air Pressure", "Percipation" }));
+        jComboViewA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboViewAActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("View A");
+
+        jComboViewB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Average Temperature", "Minimum Temperature", "Maximum Temperature", "Wind Speed", "Air Pressure", "Percipation" }));
+        jComboViewB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboViewBActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("View B");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1182,57 +1102,61 @@ public class MapViewTest extends javax.swing.JFrame {
                             .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(77, 77, 77)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(jYearBox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTimeWhole)
-                                            .addComponent(jTimeYear)))
-                                    .addComponent(jLabel8))
-                                .addGap(90, 90, 90)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jTimeWhole)
+                                    .addComponent(jTimeYear)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jYearBox, 0, 68, Short.MAX_VALUE)
+                                    .addComponent(jMonthBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 206, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboViewB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jSlider2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTimeWhole)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTimeYear)
-                                    .addComponent(jYearBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextLong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTimeWhole)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTimeYear)
+                            .addComponent(jYearBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -1244,8 +1168,23 @@ public class MapViewTest extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(jTextOpening, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(jTextOpening, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jMonthBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboViewB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboViewA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
+                .addGap(13, 13, 13))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -1260,11 +1199,11 @@ public class MapViewTest extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1673, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1799, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
+            .addComponent(jSplitPane1)
         );
 
         pack();
@@ -1274,12 +1213,16 @@ public class MapViewTest extends javax.swing.JFrame {
         if (jYearBox.getSelectedItem()!=null){
             selectedYear = Integer.parseInt((String) jYearBox.getSelectedItem());
         }
-        System.out.println("Selected Year: " + selectedYear);
+        //System.out.println("Selected Year: " + selectedYear);
         setChart1();
+        if(hmapInitialized){
+            genHeatmap();
+        }
     }//GEN-LAST:event_jYearBoxActionPerformed
 
     private void jTimeYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeYearActionPerformed
         jYearBox.setEnabled(true);
+        jMonthBox.setEnabled(true);
         timeYear = true;
         setChart1();
     }//GEN-LAST:event_jTimeYearActionPerformed
@@ -1383,10 +1326,10 @@ public class MapViewTest extends javax.swing.JFrame {
         updateInfo(n);
     }//GEN-LAST:event_jStation280ActionPerformed
 
-    private void jStation274ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation274ActionPerformed
-        int n = findStationNrIndex(274);
+    private void jStation273ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation273ActionPerformed
+        int n = findStationNrIndex(273);
         updateInfo(n);
-    }//GEN-LAST:event_jStation274ActionPerformed
+    }//GEN-LAST:event_jStation273ActionPerformed
 
     private void jStation275ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStation275ActionPerformed
         int n = findStationNrIndex(275);
@@ -1438,26 +1381,42 @@ public class MapViewTest extends javax.swing.JFrame {
         updateInfo(n);
     }//GEN-LAST:event_jStation209ActionPerformed
 
-    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
-        // TODO add your handling code here:
-        JSlider source = (JSlider)evt.getSource();
-        if (!source.getValueIsAdjusting()) {
-            selectedMonth = (int)source.getValue();
-            genHeatmap();
-
-        }
-    }//GEN-LAST:event_jSlider2StateChanged
-
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         switch(jComboBox1.getSelectedIndex()){
             case 0:
-                heatMapSelected = "tempavg";
+                heatMapSelected= "tempavg";
                 break;
             case 1:
+                heatMapSelected= "tempmin";
+               break;
+            case 2:
+                heatMapSelected= "tempmax";
+               break;   
+            case 3:
                 heatMapSelected= "windsp";
                break;
+            case 4:
+                heatMapSelected= "pressure";
+               break;
+            case 5:
+                heatMapSelected= "percipation";
+               break;   
         }
+        genHeatmap();
     }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jMonthBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMonthBoxActionPerformed
+        selectedMonth = jMonthBox.getSelectedIndex() + 1;
+        genHeatmap();
+    }//GEN-LAST:event_jMonthBoxActionPerformed
+
+    private void jComboViewAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboViewAActionPerformed
+        setChart1();
+    }//GEN-LAST:event_jComboViewAActionPerformed
+
+    private void jComboViewBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboViewBActionPerformed
+        setChart1();
+    }//GEN-LAST:event_jComboViewBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1500,7 +1459,11 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.ButtonGroup TimeScaleChoice;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboViewA;
+    private javax.swing.JComboBox<String> jComboViewB;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1508,10 +1471,11 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JComboBox<String> jMonthBox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
@@ -1524,7 +1488,7 @@ public class MapViewTest extends javax.swing.JFrame {
     private javax.swing.JRadioButton jStation251;
     private javax.swing.JRadioButton jStation259;
     private javax.swing.JRadioButton jStation270;
-    private javax.swing.JRadioButton jStation274;
+    private javax.swing.JRadioButton jStation273;
     private javax.swing.JRadioButton jStation275;
     private javax.swing.JRadioButton jStation278;
     private javax.swing.JRadioButton jStation280;

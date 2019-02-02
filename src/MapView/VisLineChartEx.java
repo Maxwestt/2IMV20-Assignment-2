@@ -77,11 +77,13 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
     double maxVal;
     boolean alldata;
     TimeSeriesDataItem item;
+    String title;
     
-    public VisLineChartEx(ArrayList<Double> datax, ArrayList<Double> datay, int year) { 
+    public VisLineChartEx(String title, ArrayList<Double> datax, ArrayList<Double> datay, int year) { 
         this.datax = datax;
         this.datay = datay;
         this.year = year;
+        this.title = title;
         minVal = 0;
         maxVal = 1.0;
         
@@ -132,7 +134,7 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
 
     private XYDataset createDataset() {
 
-        TimeSeries series = new TimeSeries("Average Temperature");
+        TimeSeries series = new TimeSeries(title);
         //System.out.println(datax.size());
         for(int i = 0; i < datax.size(); i++){
             
@@ -190,7 +192,7 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
     
     private JFreeChart createChart(XYDataset dataset) {
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
-                "Average temperature per year", 
+                title, 
                 "", 
                 "", 
                 dataset, 
@@ -228,7 +230,7 @@ public class VisLineChartEx extends JPanel implements ChartMouseListener{
         //chart.getLegend().setFrame(BlockBorder.NONE);
         
   
-        chart.setTitle(new TextTitle("Average Temperature per Day",  
+        chart.setTitle(new TextTitle(title,  
                         new Font("SansSerif", java.awt.Font.PLAIN, 12)
                 )
         );
