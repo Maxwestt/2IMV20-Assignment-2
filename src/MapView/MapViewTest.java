@@ -214,7 +214,7 @@ public final class MapViewTest extends javax.swing.JFrame {
                break;
             case 5:
                 titleC= "Percipation";
-                ydataCLoc = "Percipation";
+                ydataCLoc = "percipation";
                break;   
             }
         
