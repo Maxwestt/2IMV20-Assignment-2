@@ -4,48 +4,19 @@
  * and open the template in the editor.
  */
 package MapView;
-import java.awt.AlphaComposite;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.Image;
 import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 //import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JRadioButton;
-import javax.swing.JSlider;
-import org.jfree.data.time.Day;
-import org.tc33.jheatchart.HeatChart;
 
 /**
  *
@@ -121,7 +92,7 @@ public final class MapViewTest extends javax.swing.JFrame {
         jMonthBox.addItem("November");
         jMonthBox.addItem("December");
         drawCharts=true;
-        setChart1();
+        setChart1(true, true, true, true);
     }
     
     public void loadData(){
@@ -189,10 +160,16 @@ public final class MapViewTest extends javax.swing.JFrame {
         }   
     }
     
-    public void setChart1(){
+    
+    public void setChart1(boolean baw, boolean pl, boolean ts1, boolean ts2){
         if(!drawCharts){
             return;
         }
+        
+        jSplitPane2.setDividerLocation(0.5);
+        jSplitPane3.setDividerLocation(0.33);
+        jSplitPane4.setDividerLocation(0.5);
+        
         ArrayList<Double> dirData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("winddir")));
         ArrayList<Double> speedData1 = ((ArrayList<Double>) (H.get(stationNum).getMap().get("windsp")));
         ArrayList<Double> xdata = ((ArrayList<Double>) (H.get(stationNum).getMap().get("time")));
@@ -200,18 +177,21 @@ public final class MapViewTest extends javax.swing.JFrame {
         ArrayList<Double> ydataB = ((ArrayList<Double>) (H.get(stationNum).getMap().get("tempavg")));
         String ydataCLoc = "tempavg";
 
-        
-        PolarLineChartEx a; 
-        if (timeYear){
-            a = new PolarLineChartEx(xdata, dirData1, speedData1, selectedYear, selectedMonth);
-        } else {
-            a = new PolarLineChartEx(xdata, dirData1, speedData1, -1, selectedMonth);
+        if (pl){
+            PolarLineChartEx a; 
+            if (timeYear){
+                a = new PolarLineChartEx(xdata, dirData1, speedData1, selectedYear, selectedMonth);
+            } else {
+                a = new PolarLineChartEx(xdata, dirData1, speedData1, -1, selectedMonth);
+            }
+            this.jSplitPane3.setTopComponent(a);
         }
         
-        BoxAndWhiskerChart b;
-        String titleC = "Average Temperature";
+        if(baw){
+            BoxAndWhiskerChart b;
+            String titleC = "Average Temperature";
         
-        switch(jComboViewC.getSelectedIndex()){
+            switch(jComboViewC.getSelectedIndex()){
             case 0:
                 titleC= "Average Temperature";
                 ydataCLoc = "tempavg";
@@ -236,16 +216,19 @@ public final class MapViewTest extends javax.swing.JFrame {
                 titleC= "Percipation";
                 ydataCLoc = "Percipation";
                break;   
-        }
+            }
         
-        if (timeYear){
-            b = new BoxAndWhiskerChart(titleC, ydataCLoc, stations.get(findStationNrIndex(stationNum)), stations, selectedYear);
-        } else {
-            b = new BoxAndWhiskerChart(titleC, ydataCLoc, stations.get(findStationNrIndex(stationNum)), stations, -1);
+            if (timeYear){
+                b = new BoxAndWhiskerChart(titleC, ydataCLoc, stations.get(findStationNrIndex(stationNum)), stations, selectedYear);
+            } else {
+                b = new BoxAndWhiskerChart(titleC, ydataCLoc, stations.get(findStationNrIndex(stationNum)), stations, -1);
+            }
+            this.jSplitPane3.setBottomComponent(b);
         }
         
         String titleA = "";
         String titleB = "";
+        
         switch(jComboViewA.getSelectedIndex()){
             case 0:
                 titleA= "Average Temperature";
@@ -299,29 +282,25 @@ public final class MapViewTest extends javax.swing.JFrame {
                break;   
         }
         
-        VisLineChartEx c;
-        VisLineChartEx d;
-        if (timeYear){
-            c = new VisLineChartEx(titleA, xdata, ydataA, selectedYear);
-            d = new VisLineChartEx(titleB, xdata, ydataB, selectedYear);
-        } else {
-            c = new VisLineChartEx(titleA, xdata, ydataA, -1);
-            d = new VisLineChartEx(titleB, xdata, ydataB, -1);
+        if(ts1){
+            VisLineChartEx c;
+            if (timeYear){
+                c = new VisLineChartEx(titleA, xdata, ydataA, selectedYear);
+            } else {
+                c = new VisLineChartEx(titleA, xdata, ydataA, -1);
+            }
+            this.jSplitPane4.setTopComponent(c);
+        }
+        if(ts2){
+            VisLineChartEx d;
+            if (timeYear){
+                d = new VisLineChartEx(titleB, xdata, ydataB, selectedYear);
+            } else {
+                d = new VisLineChartEx(titleB, xdata, ydataB, -1);
+            }
+            this.jSplitPane4.setBottomComponent(d);
         }
         
-        jSplitPane2.setDividerLocation(0.5);
-        jSplitPane3.setDividerLocation(0.33);
-        jSplitPane4.setDividerLocation(0.5);
-        
-        this.jSplitPane3.setTopComponent(a);
-        this.jSplitPane3.setBottomComponent(b);
-        this.jSplitPane4.setTopComponent(c);
-        this.jSplitPane4.setBottomComponent(d);
-        //JFrame frame = new JFrame();
-        //this.add(a);
-        //this.pack();
-        //JFrame frame = new JFrame();
-        //frame.add(a);
         pack();
         setVisible(true);
     }
@@ -367,7 +346,7 @@ public final class MapViewTest extends javax.swing.JFrame {
         }
         jYearBox.setSelectedIndex((oldselectedYear-startyear));
 //        genHeatmap();
-        setChart1();
+        setChart1(true, true, true, true);
     }
     
     public int findStationNrIndex(int nr){
@@ -1271,7 +1250,7 @@ public final class MapViewTest extends javax.swing.JFrame {
             selectedYear = Integer.parseInt((String) jYearBox.getSelectedItem());
         }
         //System.out.println("Selected Year: " + selectedYear);
-        setChart1();
+        setChart1(true, false, true, true);
         if(hmapInitialized){
             genHeatmap();
         }
@@ -1281,13 +1260,13 @@ public final class MapViewTest extends javax.swing.JFrame {
         jYearBox.setEnabled(true);
         jMonthBox.setEnabled(true);
         timeYear = true;
-        setChart1();
+        setChart1(true, false, true, true);
     }//GEN-LAST:event_jTimeYearActionPerformed
 
     private void jTimeWholeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeWholeActionPerformed
         jYearBox.setEnabled(false);
         timeYear = false;
-        setChart1();
+        setChart1(true, true, true, true);
     }//GEN-LAST:event_jTimeWholeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1465,19 +1444,19 @@ public final class MapViewTest extends javax.swing.JFrame {
     private void jMonthBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMonthBoxActionPerformed
         selectedMonth = jMonthBox.getSelectedIndex() + 1;
         genHeatmap();
-        setChart1();
+        setChart1(false, true, false, false);
     }//GEN-LAST:event_jMonthBoxActionPerformed
 
     private void jComboViewAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboViewAActionPerformed
-        setChart1();
+        setChart1(false, false, true, false);
     }//GEN-LAST:event_jComboViewAActionPerformed
 
     private void jComboViewBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboViewBActionPerformed
-        setChart1();
+        setChart1(false, false, false, true);
     }//GEN-LAST:event_jComboViewBActionPerformed
 
     private void jComboViewCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboViewCActionPerformed
-        setChart1();
+        setChart1(true, false, false, false);
     }//GEN-LAST:event_jComboViewCActionPerformed
 
     /**

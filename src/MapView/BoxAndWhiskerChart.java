@@ -77,9 +77,6 @@ public class BoxAndWhiskerChart extends JPanel {
 
     private BoxAndWhiskerCategoryDataset createSampleDataset() {
         
-        int seriesCount = 2;
-        int categoryCount = 12;
-        
         String[] months = new String[12];
         months[0] = "January";
         months[1] = "February";
